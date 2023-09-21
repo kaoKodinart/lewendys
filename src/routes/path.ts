@@ -5,7 +5,7 @@ export const OTHER_PAGES = {
 
 export const USER_PAGES = {
     home: "/",
-    service:"/service",
+    menu:"/menu",
     about:"/about",
     missions:"/missions",
     contact:"/contact",

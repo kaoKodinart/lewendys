@@ -6,6 +6,7 @@ const MyButtonBlackStyle = styled(Button)(()=>({
     borderRadius:"50px",
     padding:"10px",
     color:"black",
+    minWidth:"75px",
     ':hover':{
         backgroundColor: PROJECT_COLORS.Black,
         // color:"white",

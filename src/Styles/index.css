@@ -1,0 +1,89 @@
+/* The switch - the box around the slider */
+.switch {
+  font-size: 12px;
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 1.8em;
+}
+
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "FR";
+  height: 90%;
+  width: 48%;
+  left: 2%;
+  text-decoration: dashed;
+  font-size: 1;
+  border-radius: 20px;
+  background-color:white;
+  color: black;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0 -1.31em 1.31em -1.31em rgba(0, 0, 0, 0.3) inset, 0 0 1px 0 rgba(0, 0, 0, 0.1); */
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+  font-family: "PoppinsRegular", sans-serif;
+  transition: .4s;
+}
+
+.slider:after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  right: -7px;
+  bottom: -7px;
+  border-radius: 1.71em;
+  /* background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.1)); */
+  /* background-color: #fff; */
+  z-index: -1;
+}
+
+.switch input:checked + .slider {
+  background-color: black;
+  color: white;
+}
+
+.switch input:checked + .slider:before {
+  content: "ENG";
+  transform: translateX(100%);
+  color: black;
+  font-family: "PoppinsBold", sans-serif;
+
+}
+
+.slider .on {
+  /* font-family: "PoppinsBold", sans-serif; */
+  font-size: "5px";
+}
+.slider .off {
+  /* font-family: "PoppinsBold", sans-serif; */
+}
+
+h5 {
+  font-family: "PoppinsBold", sans-serif;
+}
+
+.switch input {
+  /* display: none; */
+}

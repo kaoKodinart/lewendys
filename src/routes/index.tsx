@@ -4,6 +4,7 @@ import { USER_PAGES } from './path';
 import OthersLayout from '../layout/OthersLayout';
 import UserLayout from '../layout/UserLayout';
 import HomePage from '../pages/HomePage';
+import MenuPage from '../pages/MenuPage';
 
 
 
@@ -28,7 +29,7 @@ export default function Router() {
             element: <UserLayout/>,
             children: [
                 {element: <HomePage/>, index:true},
-                // {path: USER_PAGES.about, element: <AboutPage/>},
+                {path: USER_PAGES.menu, element: <MenuPage/>},
             ]
         },
 

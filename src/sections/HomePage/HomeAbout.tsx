@@ -26,7 +26,7 @@ function HomeAbout() {
     return (
         <HomeAboutContainer>
             {
-                homeAboutDetails.map((one, index) => <HomeAboutMod key={index} image={one.image} titre={one.title} text={one.text} sx={{flexDirection: index % 2 === 0 ?  "row" : "row-reverse" }}/>)
+                homeAboutDetails.map((one, index) => <HomeAboutMod key={index} image={one.image} titre={one.title} text={one.text} sx={{ flexDirection: index % 2 === 0 ? "row" : "row-reverse" }} buttonText={one.buttonText}/>)
             }
         </HomeAboutContainer>
     );

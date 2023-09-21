@@ -19,7 +19,7 @@ const HomeAboutModStyle= styled("div")(({theme})=> ({
 const HomeAboutModLeft = styled("div")(({theme})=> ({
     // minHeight:"50vh",
     width:"50%",
-    // display:"flex",
+    display:"flex",
     // flexDirection:"column",
     // justifyContent:"center",
     // alignItems:"flex-start",
@@ -39,8 +39,8 @@ const HomeAboutModRight = styled("div")(({theme})=> ({
     width:"calc(50% - 30px)",
     display:"flex",
     flexDirection:"column",
-    // justifyContent:"center",
-    // alignItems:"flex-start",
+    justifyContent:"center",
+    alignItems:"flex-start",
     // position:"relative",
     // backgroundColor:"green",
     [theme.breakpoints.down('md')]: {
@@ -104,10 +104,11 @@ interface Props {
     image: string,
     titre: string,
     text: string,
+    buttonText: string,
     sx? : SxProps,
 
 }
-function HomeAboutMod({image, titre, text, sx={}} :Props) {
+function HomeAboutMod({image, titre, text, sx={}, buttonText} :Props) {
     return (
         <HomeAboutModStyle sx={{...sx}}>
             <HomeAboutModLeft>
@@ -116,7 +117,7 @@ function HomeAboutMod({image, titre, text, sx={}} :Props) {
             <HomeAboutModRight>
                 <HomeAboutText>{titre}</HomeAboutText>
                 <HomeAboutSubText>{text}</HomeAboutSubText>
-                <MyButtonBlack text="Lire Plus"/>
+                <MyButtonBlack text={buttonText} sx={{padding:"10px 35px"}}/>
             </HomeAboutModRight>
         </HomeAboutModStyle>
     );

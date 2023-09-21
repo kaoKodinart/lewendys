@@ -9,4 +9,5 @@ export const PROJECT_COLORS = {
     CofeeSoft:"#F8C291",
     Jaune:"#F8C291",
     Or:"#C1853B",
+    Red:"#CC1B1B",
 }

@@ -1,0 +1,82 @@
+import { AppBar, Container, Grid, IconButton, styled } from '@mui/material';
+import { useState } from 'react';
+import HeaderAnim from '../../animations/HeaderAnim';
+import useResponsive from '../../hooks/useResponsive';
+import Menu from './Menu';
+// import MyDrawer from '../MyDrawer/MyDrawer';
+import { Email, MenuOutlined } from '@mui/icons-material';
+import { PROJECT_COLORS } from '../../common/ProjectConfig';
+import Logo from './Logo';
+import MyButtonBlack from '../MyButtonBlack';
+
+const MenuMobileBtn = styled(IconButton)(() => ({
+    alignSelf:"center",
+    color: 'white',
+    backgroundColor: PROJECT_COLORS.Blue,
+    // backgroundColor:"#F3F5FA",
+    marginLeft:"8px",
+    '&:hover': {
+        backgroundColor:PROJECT_COLORS.GreenO,
+        color: "black",
+    },
+}));
+
+const SocialMediaItemStyle = styled (IconButton)(()=>({
+    // width:"30%",
+    // height:""
+    // color:"black", 
+    borderRadius:"3px",
+    // padding:"0px 0px 0px 0px",
+    backgroundColor:"transparent",
+    border:"1px solid white",
+    color:"white",
+    '&:hover':{
+        color:"black",
+        border:"1px solid black",
+        backgroundColor:"white",
+    },
+}))
+
+function Header() {
+    const isMobile = useResponsive("down", "md");
+
+    const [openDrawer, setOpenDrawer] = useState(false);
+    const handleOPenDrawer= () => {
+        setOpenDrawer(!openDrawer)
+    }
+
+    return (
+        <AppBar>
+            <HeaderAnim>
+            <Container maxWidth={false} >
+                    {/* <Grid container sx={{...(isMobile && {paddingLeft: "0px", paddingRight: "0px"})} && {...(!isMobile && {paddingLeft: "50px", paddingRight: "50px"})}}> */}
+                    <Grid container  sx={{...(isMobile && {paddingLeft: "0px", paddingRight: "0px"})} && {...(!isMobile && {paddingLeft: "40px", paddingRight: "40px"})}}>
+                        <Grid item lg={1} md={1} sm={1} xs={1} sx={{}}>
+                             <Logo/>
+                        </Grid>
+                        <Grid item lg={8} md={9} sm={0} xs={0}  sx={{ display: "flex", alignItems: "center", justifyContent:"flex-end", }}> 
+                            {/* {!isMobile &&  <SocialMediaMenu/>} */}
+                            {!isMobile &&  <Menu/>}
+                            {/* <MyDrawer opening={openDrawer} closing={handleOPenDrawer}/>                                       */}
+                        </Grid>
+                        <Grid item lg={1} md={9} sm={0} xs={0}  sx={{ display: "flex", alignItems: "center", justifyContent:"flex-end", }}> 
+                            <SocialMediaItemStyle>
+                                <Email/>
+                            </SocialMediaItemStyle>
+                        </Grid>
+                        <Grid item lg={2} md={2} sm={11} xs={11} sx={{display:"flex", justifyContent: isMobile ? "flex-end" : "center", }}>
+                            {/* <Link to={USER_PAGES.devis} > */}
+                                <MyButtonBlack text= {"Login"} sx={{    alignSelf:"center",}} />
+                            {/* </Link> */}
+                            {/* <Button>HELLO</Button> */}
+                            {/* {isMobile && <MyDrawer opening={openDrawer} closing={handleOPenDrawer}/>} */}
+                            {isMobile && <MenuMobileBtn onClick={handleOPenDrawer} children={<MenuOutlined sx={{fontSize: "30px", }}/>}/>}
+                        </Grid>
+                    </Grid>
+                </Container>
+            </HeaderAnim>
+        </AppBar>
+    );
+}
+
+export default Header;
