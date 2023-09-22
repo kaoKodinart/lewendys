@@ -4,10 +4,13 @@ import HeaderAnim from '../../animations/HeaderAnim';
 import useResponsive from '../../hooks/useResponsive';
 import Menu from './Menu';
 // import MyDrawer from '../MyDrawer/MyDrawer';
-import { Email, MenuOutlined } from '@mui/icons-material';
+import { MenuOutlined } from '@mui/icons-material';
 import { PROJECT_COLORS } from '../../common/ProjectConfig';
 import Logo from './Logo';
 import MyButtonBlack from '../MyButtonBlack';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
+import useOffSetTop from '../../hooks/useOffSetTop';
+import { HeaderConfig } from '../../common/HeaderConfig';
 
 const MenuMobileBtn = styled(IconButton)(() => ({
     alignSelf:"center",
@@ -22,10 +25,7 @@ const MenuMobileBtn = styled(IconButton)(() => ({
 }));
 
 const SocialMediaItemStyle = styled (IconButton)(()=>({
-    // width:"30%",
-    // height:""
-    // color:"black", 
-    borderRadius:"3px",
+    borderRadius:"50px",
     // padding:"0px 0px 0px 0px",
     backgroundColor:"transparent",
     border:"1px solid white",
@@ -39,6 +39,8 @@ const SocialMediaItemStyle = styled (IconButton)(()=>({
 
 function Header() {
     const isMobile = useResponsive("down", "md");
+    const isOffset = useOffSetTop(HeaderConfig.HEIGHT);
+
 
     const [openDrawer, setOpenDrawer] = useState(false);
     const handleOPenDrawer= () => {
@@ -60,8 +62,8 @@ function Header() {
                             {/* <MyDrawer opening={openDrawer} closing={handleOPenDrawer}/>                                       */}
                         </Grid>
                         <Grid item lg={1} md={9} sm={0} xs={0}  sx={{ display: "flex", alignItems: "center", justifyContent:"flex-end", }}> 
-                            <SocialMediaItemStyle>
-                                <Email/>
+                            <SocialMediaItemStyle sx={{...(isOffset && {border:"1px solid black", color:"black"})}}>
+                                <LocalGroceryStoreIcon />
                             </SocialMediaItemStyle>
                         </Grid>
                         <Grid item lg={2} md={2} sm={11} xs={11} sx={{display:"flex", justifyContent: isMobile ? "flex-end" : "center", }}>

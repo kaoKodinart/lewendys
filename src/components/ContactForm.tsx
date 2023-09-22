@@ -1,6 +1,5 @@
 import { Container, Grid, Paper, TextField, styled } from '@mui/material';
-import React from 'react';
-import MyButtonCoffe from './MyButtonCoffe';
+import MyButtonBlack from './MyButtonBlack';
 const ContactFormContainer = styled (Paper)(()=>({
     minWidth:"300px",
     minHeight:"20vh",
@@ -16,7 +15,7 @@ padding:"30px 0px 30px 0px",
     alignItems:"center",
 }))
 
-const TextFieldStyle=styled(TextField)(({theme})=>({
+const TextFieldStyle=styled(TextField)(()=>({
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
         //   borderColor: 'red', // couleur personnalisée
@@ -66,7 +65,7 @@ function ContactForm() {
                     {/* <ButtonContaine>
                         <Button variant="contained" sx={{backgroundColor:"#FF8000", width:"200px", height:"50px", marginTop:"50px"}} onClick={submit}>Envoyer</Button>
                     </ButtonContainer> */}
-                    <MyButtonCoffe text='Envoyer' sx={{padding:"15px 40px", mt:3}}/>
+                    <MyButtonBlack text='Envoyer' sx={{padding:"15px 40px", mt:3}}/>
                 </Container>
         </ContactFormContainer>
     );

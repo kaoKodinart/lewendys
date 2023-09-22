@@ -7,8 +7,7 @@ export const USER_PAGES = {
     home: "/",
     menu:"/menu",
     about:"/about",
-    missions:"/missions",
     contact:"/contact",
-    devis:"/devis",
+    reservation:"/reservation",
     // blogsDetail:"/blogsDetail/:id",
 };

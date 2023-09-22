@@ -18,7 +18,7 @@ export const UserMenuItems = [
     },
     {
         title: "A Propos",
-        path: ""
+        path: USER_PAGES.about
     },
     {
         title: "Menu",
@@ -26,11 +26,11 @@ export const UserMenuItems = [
     },
     {
         title: "Reservation",
-        path: ""
+        path: USER_PAGES.reservation
     },
     {
         title: "Contact",
-        path: ""
+        path: USER_PAGES.contact
     },
 ];
 

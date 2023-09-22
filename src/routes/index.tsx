@@ -5,6 +5,9 @@ import OthersLayout from '../layout/OthersLayout';
 import UserLayout from '../layout/UserLayout';
 import HomePage from '../pages/HomePage';
 import MenuPage from '../pages/MenuPage';
+import AboutPage from '../pages/AboutPage';
+import ContactPage from '../pages/ContactPage';
+import ReservationPage from '../pages/ReservationPage';
 
 
 
@@ -30,6 +33,9 @@ export default function Router() {
             children: [
                 {element: <HomePage/>, index:true},
                 {path: USER_PAGES.menu, element: <MenuPage/>},
+                {path: USER_PAGES.about, element: <AboutPage/>},
+                {path: USER_PAGES.contact, element: <ContactPage/>},
+                {path: USER_PAGES.reservation, element: <ReservationPage/>},
             ]
         },
 

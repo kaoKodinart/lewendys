@@ -9,12 +9,12 @@ import LittleContactBanner from "../sections/HomePage/LittleContactBanner";
 function HomePage() {
     return (
         <Page title="Accueil">
-            <HomeHero/>
+            {/* <HomeHero/> */}
             <HomeAbout/>
-            <HomeMenu/>
-            <HomeTestimony/>
-            <HomeContact/>
-            <LittleContactBanner/>
+            {/* <HomeMenu/> */}
+            {/* <HomeTestimony/> */}
+            {/* <HomeContact/> */}
+            {/* <LittleContactBanner/> */}
         </Page>
     );
 }

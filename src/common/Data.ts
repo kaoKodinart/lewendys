@@ -53,11 +53,19 @@ export const menuItems = [
       category: 'Chocolat Cake',
       name: 'SALADE',
       price: "12 €",
-      image: '/src/assets/images/salade.jpg',
+      image: '/src/assets/images/tacos.jpg',
       desc: "Lorem ipsum dolor sit amet consectetur."
     },
     {
       id: 6,
+      category: 'Chocolat Cake',
+      name: 'SALADE',
+      price: "12 €",
+      image: '/src/assets/images/salade.jpg',
+      desc: "Lorem ipsum dolor sit amet consectetur."
+    },
+    {
+      id: 7,
       category: 'Chocolat Cake',
       name: 'SALADE',
       price: "12 €",

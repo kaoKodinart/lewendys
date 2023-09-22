@@ -1,4 +1,4 @@
-import { Button, Grid, Stack, Typography, styled } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Stack, Typography, styled } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { menuItems } from '../common/Data';
 import { PROJECT_COLORS } from '../common/ProjectConfig';
@@ -51,6 +51,17 @@ function MenuFilter() {
           }
       }, []);
 
+
+
+
+      const [open, setOpen] = useState(false);
+    const [selectedDish, setSelectedDish] = useState(null);
+
+    const handleOpenDialog = (dish : any) => {
+        setSelectedDish(dish);
+        setOpen(true);
+      };
+
     return (
         <MenuFilterContainer>
             <Stack direction={"row"} spacing={2} sx={{mb:3}}>
@@ -65,15 +76,29 @@ function MenuFilter() {
                 </MenuFilterButton>
             ))}
             </Stack>
-            <Grid container spacing={3}>
+            <Grid container spacing={1}>
             {menuItems
             .filter((item) => selectedCategory === null || item.category === selectedCategory)
             .map((item) => (
-                <Grid item key={item.id} xs={12} sm={6} md={4} lg={4} sx={{display:"grid", placeItems:"center"}}>
-                    <MenuPageItem image={item.image} id={item.id} nom={item.name} description={item.desc} prix={item.price} />
+                <Grid item key={item.id} xs sx={{display:"grid", placeItems:"center"}}>
+                    <MenuPageItem  image={item.image} id={item.id} nom={item.name} description={item.desc} prix={item.price} cliqFunc={() => handleOpenDialog(item)} />
                 </Grid>
             ))}
             </Grid>
+            <Dialog open={open} onClose={() => setOpen(false)}>
+                <DialogTitle>Détails du plat</DialogTitle>
+                <DialogContent>
+                    {selectedDish && (
+                    <>
+                        
+                        {/* Affichez d'autres informations du plat ici */}
+                    </>
+                    )}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setOpen(false)}>Fermer</Button>
+                </DialogActions>
+            </Dialog>
         </MenuFilterContainer>
     );
 }

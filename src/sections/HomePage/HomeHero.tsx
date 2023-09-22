@@ -29,6 +29,7 @@ const RightImg = styled("img")(({theme}) => ({
     top: 0,
     // height: "auto",
     [theme.breakpoints.down('md')]: {
+        display:"none",
     },
 
 }));
