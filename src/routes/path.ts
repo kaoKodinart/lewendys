@@ -9,5 +9,6 @@ export const USER_PAGES = {
     about:"/about",
     contact:"/contact",
     reservation:"/reservation",
+    panier:"/panier",
     // blogsDetail:"/blogsDetail/:id",
 };

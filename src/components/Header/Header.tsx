@@ -11,6 +11,8 @@ import MyButtonBlack from '../MyButtonBlack';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import useOffSetTop from '../../hooks/useOffSetTop';
 import { HeaderConfig } from '../../common/HeaderConfig';
+import { Link } from 'react-router-dom';
+import { USER_PAGES } from '../../routes/path';
 
 const MenuMobileBtn = styled(IconButton)(() => ({
     alignSelf:"center",
@@ -62,9 +64,11 @@ function Header() {
                             {/* <MyDrawer opening={openDrawer} closing={handleOPenDrawer}/>                                       */}
                         </Grid>
                         <Grid item lg={1} md={9} sm={0} xs={0}  sx={{ display: "flex", alignItems: "center", justifyContent:"flex-end", }}> 
-                            <SocialMediaItemStyle sx={{...(isOffset && {border:"1px solid black", color:"black"})}}>
-                                <LocalGroceryStoreIcon />
-                            </SocialMediaItemStyle>
+                            <Link to={USER_PAGES.panier}>
+                                <SocialMediaItemStyle sx={{...(isOffset && {border:"1px solid black", color:"black"})}} >
+                                    <LocalGroceryStoreIcon />
+                                </SocialMediaItemStyle>
+                            </Link>
                         </Grid>
                         <Grid item lg={2} md={2} sm={11} xs={11} sx={{display:"flex", justifyContent: isMobile ? "flex-end" : "center", }}>
                             {/* <Link to={USER_PAGES.devis} > */}

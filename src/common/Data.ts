@@ -1,3 +1,5 @@
+import { MenuModel } from "../models/MenuModel";
+
 export const homeAboutDetails = [
     {
         image:"/src/assets/images/home_about_img1.jpg",
@@ -13,65 +15,58 @@ export const homeAboutDetails = [
     }
 ];
 
-export const menuItems = [
+export const menuItems: MenuModel[] = [
+
     {
-      id: 1,
-      category: 'Chocolat Cake',
-      name: 'SALADE',
-      price: "12 €",
-      image: '/src/assets/images/salade.jpg',
-      desc: "Lorem ipsum dolor sit amet consectetur."
-    },
-    {
-      id: 2,
-      category: 'Breakfast',
-      name: 'TACOS',
-      price: "10 €",
+      uid: 2,
+      categorie: 'Breakfast',
+      nomMenu: 'TACOS',
+      prix: "10 €",
       image: '/src/assets/images/tacos.jpg',
-      desc: "Lorem ipsum dolor sit amet consectetur."
+      description: "Lorem ipsum dolor sit amet consectetur."
   
     },
     {
-      id: 3,
-      category: 'Tasty Donuts',
-      name: 'BURGUER',
-      price: "16 €",
+      uid: 3,
+      categorie: 'Tasty Donuts',
+      nomMenu: 'BURGUER',
+      prix: "16 €",
       image: '/src/assets/images/burger.jpg',
-      desc: "Lorem ipsum dolor sit amet consectetur."
+      description: "Lorem ipsum dolor sit amet consectetur."
   
     },
     {
-      id: 4,
-      category: 'Chocolat Cake',
-      name: 'SALADE',
-      price: "12 €",
+      uid: 4,
+      categorie: 'Chocolat Cake',
+      nomMenu: 'SALADE',
+      prix: "12 €",
       image: '/src/assets/images/salade.jpg',
-      desc: "Lorem ipsum dolor sit amet consectetur."
+      description: "Lorem ipsum dolor sit amet consectetur."
     },
     {
-      id: 5,
-      category: 'Chocolat Cake',
-      name: 'SALADE',
-      price: "12 €",
+      uid: 5,
+      categorie: 'Chocolat Cake',
+      nomMenu: 'SALADE',
+      prix: "12 €",
       image: '/src/assets/images/tacos.jpg',
-      desc: "Lorem ipsum dolor sit amet consectetur."
+      description: "Lorem ipsum dolor sit amet consectetur."
     },
-    {
-      id: 6,
-      category: 'Chocolat Cake',
-      name: 'SALADE',
-      price: "12 €",
-      image: '/src/assets/images/salade.jpg',
-      desc: "Lorem ipsum dolor sit amet consectetur."
-    },
-    {
-      id: 7,
-      category: 'Chocolat Cake',
-      name: 'SALADE',
-      price: "12 €",
-      image: '/src/assets/images/salade.jpg',
-      desc: "Lorem ipsum dolor sit amet consectetur."
-    },
+    // {
+    //   uid: 6,
+    //   categorie: 'Chocolat Cake',
+    //   nomMenu: 'SALADE',
+    //   prix: "12 €",
+    //   image: '/src/assets/images/salade.jpg',
+    //   description: "Lorem ipsum dolor sit amet consectetur."
+    // },
+    // {
+    //   uid: 7,
+    //   categorie: 'Chocolat Cake',
+    //   nomMenu: 'SALADE',
+    //   prix: "12 €",
+    //   image: '/src/assets/images/salade.jpg',
+    //   description: "Lorem ipsum dolor sit amet consectetur."
+    // },
 //     {
 //       id: 4,
 //       category: 'Breakfast',

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { menuItems } from '../common/Data';
 import { PROJECT_COLORS } from '../common/ProjectConfig';
 import MenuPageItem from './MenuPageItem';
+import MenuDialog from './MenuDialog';
 
 const MenuFilterContainer = styled("div")(()=>({
     display:"flex",
@@ -31,9 +32,16 @@ const MenuFilterButtonText = styled(Typography)(({theme})=>({
 }));
 
 function MenuFilter() {
+    const [cart, setCart] = useState([]);
+
+    // const addToCart = (item: any) => {
+    //     // Créez une copie du panier actuel et ajoutez le plat sélectionné
+    //     setCart([...cart, item]);
+    //     // Mettez à jour l'état du panier avec la nouvelle copie
+    //   };
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     
-    const categories = Array.from(new Set(menuItems.map((item) => item.category)));
+    const categories = Array.from(new Set(menuItems.map((item) => item.categorie)));
     const firstCategoryButtonRef = useRef<HTMLButtonElement | null>(null);
 
 
@@ -43,7 +51,7 @@ function MenuFilter() {
 
       useEffect(() => {
         if (menuItems.length > 0) {
-          setSelectedCategory(menuItems[0].category);
+          setSelectedCategory(menuItems[0].categorie);
         }
 
         if (firstCategoryButtonRef.current) {
@@ -51,16 +59,15 @@ function MenuFilter() {
           }
       }, []);
 
+        const [open, setOpen] = useState(false);
+        const [selectedDish, setSelectedDish] = useState(null);
 
-
-
-      const [open, setOpen] = useState(false);
-    const [selectedDish, setSelectedDish] = useState(null);
-
-    const handleOpenDialog = (dish : any) => {
+        const handleOpenDialog = (dish : any) => {
         setSelectedDish(dish);
         setOpen(true);
       };
+
+      const [modalStates, setModalStates] = useState<{ [key: string]: boolean }>({});
 
     return (
         <MenuFilterContainer>
@@ -78,27 +85,30 @@ function MenuFilter() {
             </Stack>
             <Grid container spacing={1}>
             {menuItems
-            .filter((item) => selectedCategory === null || item.category === selectedCategory)
+            .filter((item) => selectedCategory === null || item.categorie === selectedCategory)
             .map((item) => (
-                <Grid item key={item.id} xs sx={{display:"grid", placeItems:"center"}}>
-                    <MenuPageItem  image={item.image} id={item.id} nom={item.name} description={item.desc} prix={item.price} cliqFunc={() => handleOpenDialog(item)} />
+                <Grid item key={item.uid} xs sx={{display:"grid", placeItems:"center"}}>
+                    <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleOpenDialog(item)} />
+                    <MenuDialog menu={item} stateInit={open} stateClose={() => setOpen(false)} />
+                    {/* <MenuDialog menu={item} stateInit={modalStates[item.uid]} stateClose={() => setOpen(false)} /> */}
                 </Grid>
-            ))}
+            ))
+            
+        }
             </Grid>
-            <Dialog open={open} onClose={() => setOpen(false)}>
+            {/* <Dialog open={open} onClose={() => setOpen(false)}>
                 <DialogTitle>Détails du plat</DialogTitle>
                 <DialogContent>
                     {selectedDish && (
                     <>
                         
-                        {/* Affichez d'autres informations du plat ici */}
                     </>
                     )}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => setOpen(false)}>Fermer</Button>
                 </DialogActions>
-            </Dialog>
+            </Dialog> */}
         </MenuFilterContainer>
     );
 }

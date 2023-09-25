@@ -8,6 +8,7 @@ import MenuPage from '../pages/MenuPage';
 import AboutPage from '../pages/AboutPage';
 import ContactPage from '../pages/ContactPage';
 import ReservationPage from '../pages/ReservationPage';
+import PanierPage from '../pages/PanierPage';
 
 
 
@@ -36,6 +37,7 @@ export default function Router() {
                 {path: USER_PAGES.about, element: <AboutPage/>},
                 {path: USER_PAGES.contact, element: <ContactPage/>},
                 {path: USER_PAGES.reservation, element: <ReservationPage/>},
+                {path: USER_PAGES.panier, element: <PanierPage/>},
             ]
         },
 
