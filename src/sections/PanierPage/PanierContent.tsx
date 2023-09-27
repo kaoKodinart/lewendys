@@ -1,6 +1,8 @@
-import { styled } from '@mui/material';
+import { Grid, styled } from '@mui/material';
 import SectionStyle from '../../Styles/SectionStyle';
 import { useState } from 'react';
+import { RootState, useAppSelector } from '../../redux/store';
+import MenuPageItem from '../../components/MenuPageItem';
 
 const PanierContentStyle = styled(SectionStyle)(({theme})=> ({
     minHeight:"50vh",
@@ -21,10 +23,20 @@ const PanierContentStyle = styled(SectionStyle)(({theme})=> ({
 }))
 
 function PanierContent() {
+    const panier = useAppSelector((state: RootState) => state.plats.plats);
+
 
     return (
         <PanierContentStyle>
-            
+            <Grid container>
+                {
+                    panier.map((item, index) => (
+                        <Grid item xs>
+                            <MenuPageItem image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix}/>
+                        </Grid>
+                    )
+                )}
+            </Grid>
         </PanierContentStyle>
     );
 }

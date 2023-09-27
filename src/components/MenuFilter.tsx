@@ -4,6 +4,9 @@ import { menuItems } from '../common/Data';
 import { PROJECT_COLORS } from '../common/ProjectConfig';
 import MenuPageItem from './MenuPageItem';
 import MenuDialog from './MenuDialog';
+import { MenuModel } from '../models/MenuModel';
+import { useAppDispatch } from '../redux/store';
+import { addPanier } from '../redux/slices/Plats';
 
 const MenuFilterContainer = styled("div")(()=>({
     display:"flex",
@@ -32,6 +35,8 @@ const MenuFilterButtonText = styled(Typography)(({theme})=>({
 }));
 
 function MenuFilter() {
+    const dispatch = useAppDispatch();
+
     const [cart, setCart] = useState([]);
 
     // const addToCart = (item: any) => {
@@ -60,14 +65,15 @@ function MenuFilter() {
       }, []);
 
         const [open, setOpen] = useState(false);
-        const [selectedDish, setSelectedDish] = useState(null);
 
         const handleOpenDialog = (dish : any) => {
-        setSelectedDish(dish);
         setOpen(true);
       };
 
-      const [modalStates, setModalStates] = useState<{ [key: string]: boolean }>({});
+      const ajoutAuPanier = (plat : MenuModel) => {
+        dispatch(addPanier(plat))
+      }
+
 
     return (
         <MenuFilterContainer>
@@ -88,9 +94,9 @@ function MenuFilter() {
             .filter((item) => selectedCategory === null || item.categorie === selectedCategory)
             .map((item) => (
                 <Grid item key={item.uid} xs sx={{display:"grid", placeItems:"center"}}>
-                    <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleOpenDialog(item)} />
+                    {/* <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleOpenDialog(item)} /> */}
+                    <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => ajoutAuPanier(item)} />
                     <MenuDialog menu={item} stateInit={open} stateClose={() => setOpen(false)} />
-                    {/* <MenuDialog menu={item} stateInit={modalStates[item.uid]} stateClose={() => setOpen(false)} /> */}
                 </Grid>
             ))
             
