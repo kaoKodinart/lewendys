@@ -89,7 +89,7 @@ function MenuFilter() {
             .filter((item) => selectedCategory === null || item.categorie === selectedCategory)
             .map((item) => (
                 <Grid  key={item.uid} xs sx={{display:"grid", placeItems:"center"}}>
-                    <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleOpenDialog(item)} />
+                    <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={""} cliqFunc={() => handleOpenDialog(item)} />
                     <MenuDialog menu={item} stateInit={open} stateClose={() => setOpen(false)} />
                     {/* <MenuDialog menu={item} stateInit={modalStates[item.uid]} stateClose={() => setOpen(false)} /> */}
                 </Grid>
