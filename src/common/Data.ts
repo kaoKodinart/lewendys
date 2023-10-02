@@ -21,35 +21,74 @@ export const menuItems: MenuModel[] = [
       uid: 2,
       categorie: 'Breakfast',
       nomMenu: 'TACOS',
-      prix: "10 €",
+      prix: 10,
       image: '/src/assets/images/tacos.jpg',
-      description: "Lorem ipsum dolor sit amet consectetur."
+      description: "Lorem ipsum dolor sit amet consectetur.",
+      variations: [
+        {
+          nomVariation: "Piment",
+          options: [
+            {
+              nomOption: "Moyen",
+              prix: 2,
+            },
+            {
+              nomOption: "Elevé",
+              prix: 5,
+            },
+            {
+              nomOption: "Bas",
+              prix: 1,
+            }
+          ]
+        },
+        {
+          nomVariation: "Size",
+          options: [
+            {
+              nomOption: "Gros",
+              prix: 5,
+            },
+            {
+              nomOption: "Moins gros",
+              prix: 3,
+            },
+            {
+              nomOption: "Petit",
+              prix: 2,
+            }
+          ]
+        }
+      ],
   
     },
     {
       uid: 3,
       categorie: 'Tasty Donuts',
       nomMenu: 'BURGUER',
-      prix: "16 €",
+      prix: 16,
       image: '/src/assets/images/burger.jpg',
-      description: "Lorem ipsum dolor sit amet consectetur."
+      description: "Lorem ipsum dolor sit amet consectetur.",
+      variations: [],
   
     },
     {
       uid: 4,
       categorie: 'Chocolat Cake',
       nomMenu: 'SALADE',
-      prix: "12 €",
+      prix: 12,
       image: '/src/assets/images/salade.jpg',
-      description: "Lorem ipsum dolor sit amet consectetur."
+      description: "Lorem ipsum dolor sit amet consectetur.",
+      variations: [],
     },
     {
       uid: 5,
       categorie: 'Chocolat Cake',
       nomMenu: 'SALADE',
-      prix: "12 €",
+      prix: 12,
       image: '/src/assets/images/tacos.jpg',
-      description: "Lorem ipsum dolor sit amet consectetur."
+      description: "Lorem ipsum dolor sit amet consectetur.",
+      variations: [],
     },
     // {
     //   uid: 6,

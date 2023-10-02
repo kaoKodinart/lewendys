@@ -37,7 +37,7 @@ interface Props {
     id: number,
     nom: string,
     description: string,
-    prix: string,
+    prix: number,
     cliqFunc: Function
 }
 

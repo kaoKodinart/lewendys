@@ -62,6 +62,7 @@ function MenuFilter() {
         const [open, setOpen] = useState(false);
         const [selectedDish, setSelectedDish] = useState(null);
 
+        
         const handleOpenDialog = (dish : any) => {
         setSelectedDish(dish);
         setOpen(true);
@@ -87,7 +88,7 @@ function MenuFilter() {
             {menuItems
             .filter((item) => selectedCategory === null || item.categorie === selectedCategory)
             .map((item) => (
-                <Grid item key={item.uid} xs sx={{display:"grid", placeItems:"center"}}>
+                <Grid  key={item.uid} xs sx={{display:"grid", placeItems:"center"}}>
                     <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleOpenDialog(item)} />
                     <MenuDialog menu={item} stateInit={open} stateClose={() => setOpen(false)} />
                     {/* <MenuDialog menu={item} stateInit={modalStates[item.uid]} stateClose={() => setOpen(false)} /> */}
@@ -101,7 +102,7 @@ function MenuFilter() {
                 <DialogContent>
                     {selectedDish && (
                     <>
-                        
+
                     </>
                     )}
                 </DialogContent>
