@@ -56,7 +56,7 @@ function MenuPageItem({image, id, nom, description, prix, cliqFunc}:Props) {
                     <CardContent sx={{display:"flex", flexDirection:"column", justifyContent:"space-around"}}>
                         <MenuItemName>{nom}</MenuItemName>
                         <MenuItemDesc>{description}</MenuItemDesc>
-                        <MenuItemPrice>{prix}</MenuItemPrice>
+                        <MenuItemPrice>{prix}$</MenuItemPrice>
                         {/* <MyButtonBlack text='Voir Details'/> */}
                     </CardContent>
                 </Box>

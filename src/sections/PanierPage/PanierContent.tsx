@@ -3,12 +3,13 @@ import SectionStyle from '../../Styles/SectionStyle';
 import { useState } from 'react';
 import { RootState, useAppSelector } from '../../redux/store';
 import MenuPageItem from '../../components/MenuPageItem';
+import CartTable from '../../components/CartTable';
 
 const PanierContentStyle = styled(SectionStyle)(({theme})=> ({
     minHeight:"50vh",
     // opacity:0.8,
     display:"flex",
-    flexDirection:"row",
+    flexDirection:"column",
     justifyContent:"center",
     alignItems:"center",
     [theme.breakpoints.down("lg")]: {
@@ -28,6 +29,7 @@ function PanierContent() {
 
     return (
         <PanierContentStyle>
+            <CartTable/>
             <Grid container>
                 {
                     panier.map((item, index) => (

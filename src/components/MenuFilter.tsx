@@ -4,6 +4,10 @@ import { menuItems } from '../common/Data';
 import { PROJECT_COLORS } from '../common/ProjectConfig';
 import MenuPageItem from './MenuPageItem';
 import MenuDialog from './MenuDialog';
+import { useAppDispatch } from '../redux/store';
+import { addPanier } from '../redux/slices/Plats';
+import { MenuItemModel } from '../models/MenuItemModel';
+import { MenuModel } from '../models/MenuModel';
 
 const MenuFilterContainer = styled("div")(()=>({
     display:"flex",
@@ -32,18 +36,19 @@ const MenuFilterButtonText = styled(Typography)(({theme})=>({
 }));
 
 function MenuFilter() {
+    const dispatch = useAppDispatch();
+
     const [cart, setCart] = useState([]);
 
-    // const addToCart = (item: any) => {
-    //     // Créez une copie du panier actuel et ajoutez le plat sélectionné
-    //     setCart([...cart, item]);
-    //     // Mettez à jour l'état du panier avec la nouvelle copie
-    //   };
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     
     const categories = Array.from(new Set(menuItems.map((item) => item.categorie)));
     const firstCategoryButtonRef = useRef<HTMLButtonElement | null>(null);
 
+    const handleAjouterAuPanier = (plat: MenuModel) => {
+        // Dispatch de l'action addPanier avec le plat sélectionné
+        dispatch(addPanier(plat));
+      };
 
     const handleCategoryClick = (category: string) => {
         setSelectedCategory(category);
@@ -60,11 +65,9 @@ function MenuFilter() {
       }, []);
 
         const [open, setOpen] = useState(false);
-        const [selectedDish, setSelectedDish] = useState(null);
 
         
         const handleOpenDialog = (dish : any) => {
-        setSelectedDish(dish);
         setOpen(true);
       };
 
@@ -89,27 +92,14 @@ function MenuFilter() {
             .filter((item) => selectedCategory === null || item.categorie === selectedCategory)
             .map((item) => (
                 <Grid  key={item.uid} xs sx={{display:"grid", placeItems:"center"}}>
-                    <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={0} cliqFunc={() => handleOpenDialog(item)} />
+                    <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleOpenDialog(item)} />
+                    {/* <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleAjouterAuPanier(item)} /> */}
                     <MenuDialog menu={item} stateInit={open} stateClose={() => setOpen(false)} />
-                    {/* <MenuDialog menu={item} stateInit={modalStates[item.uid]} stateClose={() => setOpen(false)} /> */}
                 </Grid>
             ))
             
         }
             </Grid>
-            {/* <Dialog open={open} onClose={() => setOpen(false)}>
-                <DialogTitle>Détails du plat</DialogTitle>
-                <DialogContent>
-                    {selectedDish && (
-                    <>
-
-                    </>
-                    )}
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setOpen(false)}>Fermer</Button>
-                </DialogActions>
-            </Dialog> */}
         </MenuFilterContainer>
     );
 }
