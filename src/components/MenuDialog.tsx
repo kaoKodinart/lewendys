@@ -25,16 +25,15 @@ function MenuDialog({menu, stateInit, stateClose}: Props) {
 
     const handleOptionChange = (option: OptionModel) => {
         // Vérifier si l'option est déjà sélectionnée
-        const isSelected = selectedOptions.includes(option);
+        // const isSelected = selectedOptions.includes(option);
+        const isSelected = selectedOptions.map(one => one.parent).includes(option.parent);
+        
     
-        if (isSelected) {
-          // Si elle est sélectionnée, la retirer de la liste des options sélectionnées
-          setSelectedOptions((prevSelected) =>
-            prevSelected.filter((item) => item !== option)
-          );
-        } else {
-          // Si elle n'est pas sélectionnée, l'ajouter à la liste des options sélectionnées
+        if (!isSelected) {
           setSelectedOptions((prevSelected) => [...prevSelected, option]);
+        }else {
+          const optionList = [option, ...(selectedOptions.filter(one => one.parent != option.parent))];
+          setSelectedOptions(optionList);
         }
       };
     const handleChanges = (optionPrix: number) => {

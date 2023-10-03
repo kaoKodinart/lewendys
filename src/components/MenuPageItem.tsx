@@ -37,14 +37,14 @@ interface Props {
     id: number,
     nom: string,
     description: string,
-    prix: string,
-    cliqFunc: Function
+    prix: number,
+    cliqFunc?: Function
 }
 
 function MenuPageItem({image, id, nom, description, prix, cliqFunc}:Props) {
     return (
         <Fade variants={FadeVariants({durationIn: 1}).in}>
-            <MenuItemStyle key={id} onClick={()=> cliqFunc()}>
+            <MenuItemStyle key={id} onClick={()=> {if (cliqFunc !== null ){cliqFunc!()}}}>
                 <CardMedia
                 sx={{borderRadius:"10px",  width:155, objectFit:"cover"}}
                 component="img"

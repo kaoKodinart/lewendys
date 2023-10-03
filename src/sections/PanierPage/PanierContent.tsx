@@ -32,7 +32,7 @@ function PanierContent() {
                 {
                     panier.map((item, index) => (
                         <Grid item xs>
-                            <MenuPageItem image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix}/>
+                            <MenuPageItem image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} />
                         </Grid>
                     )
                 )}

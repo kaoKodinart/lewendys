@@ -29,14 +29,17 @@ export const menuItems: MenuModel[] = [
           nomVariation: "Piment",
           options: [
             {
+              parent: "Piment",
               nomOption: "Moyen",
               prix: 2,
             },
             {
+              parent: "Piment",
               nomOption: "Elevé",
               prix: 5,
             },
             {
+              parent: "Piment",
               nomOption: "Bas",
               prix: 1,
             }
@@ -46,14 +49,17 @@ export const menuItems: MenuModel[] = [
           nomVariation: "Size",
           options: [
             {
+              parent: "Size",
               nomOption: "Gros",
               prix: 5,
             },
             {
+              parent: "Size",
               nomOption: "Moins gros",
               prix: 3,
             },
             {
+              parent: "Size",
               nomOption: "Petit",
               prix: 2,
             }
