@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { MenuModel } from "../../models/MenuModel";
+import { PanierItemModel } from "../../models/PanierItemModel";
 
 interface PlatState {
-    plats: Array<MenuModel>
+    plats: Array<PanierItemModel>
 };
 
 const initialState: PlatState = {
@@ -13,7 +13,7 @@ const PlatSlice = createSlice({
     name: "plats",
     initialState,
     reducers: {
-        addPanier(state, action: PayloadAction<MenuModel>) {
+        addPanier(state, action: PayloadAction<PanierItemModel>) {
             state.plats.push(action.payload)
         }
     },

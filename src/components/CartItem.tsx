@@ -1,5 +1,6 @@
 import { Paper, styled } from "@mui/material";
 import { MenuModel } from "../models/MenuModel";
+import { PanierItemModel } from "../models/PanierItemModel";
 
 
 const CartItemStyle = styled ("div")(()=>({
@@ -18,26 +19,25 @@ padding:"30px 0px 30px 0px",
 }))
 
 interface Props {
-    itemModel: MenuModel
+    itemModel: PanierItemModel
 }
 function CartItem({itemModel}: Props) {
     return (
         <CartItemStyle>
             <CartItemStyle>
-                {itemModel.nomMenu}
-                {itemModel.prix}
+                {itemModel.selectedMenu.nomMenu}
+                {itemModel.selectedMenu.prix!}
                 <ul>
-                    {itemModel.variations.map((e, index) => (
+                    {itemModel.variation.map((e, index) => (
                         <li>
-                            <div>{e.nomVariation}</div>
+                            <div>{e.parent}</div>
                             <ul>
-                                {e.options.map((e, index) => (
-                                    <li>{e.nomOption}-{e.prix}</li>
-                                ))}
+                                {e.nomOption}
                             </ul>
                         </li>
                     ))}
                 </ul>
+                {itemModel.prixFinal}
             </CartItemStyle>
         </CartItemStyle>
     );

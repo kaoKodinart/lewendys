@@ -8,6 +8,7 @@ import { useAppDispatch } from '../redux/store';
 import { addPanier } from '../redux/slices/Plats';
 import { MenuItemModel } from '../models/MenuItemModel';
 import { MenuModel } from '../models/MenuModel';
+import { PanierItemModel } from '../models/PanierItemModel';
 
 const MenuFilterContainer = styled("div")(()=>({
     display:"flex",
@@ -45,7 +46,7 @@ function MenuFilter() {
     const categories = Array.from(new Set(menuItems.map((item) => item.categorie)));
     const firstCategoryButtonRef = useRef<HTMLButtonElement | null>(null);
 
-    const handleAjouterAuPanier = (plat: MenuModel) => {
+    const handleAjouterAuPanier = (plat: PanierItemModel) => {
         // Dispatch de l'action addPanier avec le plat sélectionné
         dispatch(addPanier(plat));
       };
