@@ -1,4 +1,4 @@
-import { AppBar, Container, Grid, IconButton, styled } from '@mui/material';
+import { AppBar, Badge, BadgeProps, Container, Grid, IconButton, styled } from '@mui/material';
 import { useState } from 'react';
 import HeaderAnim from '../../animations/HeaderAnim';
 import useResponsive from '../../hooks/useResponsive';
@@ -13,6 +13,7 @@ import useOffSetTop from '../../hooks/useOffSetTop';
 import { HeaderConfig } from '../../common/HeaderConfig';
 import { Link } from 'react-router-dom';
 import { USER_PAGES } from '../../routes/path';
+import { RootState, useAppSelector } from '../../redux/store';
 
 const MenuMobileBtn = styled(IconButton)(() => ({
     alignSelf:"center",
@@ -39,6 +40,16 @@ const SocialMediaItemStyle = styled (IconButton)(()=>({
     },
 }))
 
+const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+    '& .MuiBadge-badge': {
+      right: -3,
+      top: 8,
+      backgroundColor:PROJECT_COLORS.Or,
+    //   border: `2px solid ${theme.palette.background.paper}`,
+      padding: '0 4px',
+    },
+  }));
+
 function Header() {
     const isMobile = useResponsive("down", "md");
     const isOffset = useOffSetTop(HeaderConfig.HEIGHT);
@@ -48,6 +59,9 @@ function Header() {
     const handleOPenDrawer= () => {
         setOpenDrawer(!openDrawer)
     }
+
+    const panier = useAppSelector((state: RootState) => state.plats.plats);
+
 
     return (
         <AppBar>
@@ -65,9 +79,11 @@ function Header() {
                         </Grid>
                         <Grid item lg={1} md={9} sm={0} xs={0}  sx={{ display: "flex", alignItems: "center", justifyContent:"flex-end", }}> 
                             <Link to={USER_PAGES.panier}>
-                                <SocialMediaItemStyle sx={{...(isOffset && {border:"1px solid black", color:"black"})}} >
-                                    <LocalGroceryStoreIcon />
-                                </SocialMediaItemStyle>
+                                <StyledBadge badgeContent={panier.length} sx={{}} color="primary">
+                                    <SocialMediaItemStyle sx={{...(isOffset && {border:"1px solid black", color:"black"})}} >
+                                            <LocalGroceryStoreIcon />
+                                    </SocialMediaItemStyle>
+                                </StyledBadge>
                             </Link>
                         </Grid>
                         <Grid item lg={2} md={2} sm={11} xs={11} sx={{display:"flex", justifyContent: isMobile ? "flex-end" : "center", }}>

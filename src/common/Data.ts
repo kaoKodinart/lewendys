@@ -75,7 +75,48 @@ export const menuItems: MenuModel[] = [
       prix: 16,
       image: '/src/assets/images/burger.jpg',
       description: "Lorem ipsum dolor sit amet consectetur.",
-      variations: [],
+      variations: [
+        {
+          nomVariation: "Mayonnaise",
+          options: [
+            {
+              parent: "Mayonnaise",
+              nomOption: "Peu",
+              prix: 5,
+            },
+            {
+              parent: "Mayonnaise",
+              nomOption: "Beaucoup",
+              prix: 8,
+            },
+            {
+              parent: "Mayonnaise",
+              nomOption: "Moyen",
+              prix: 2,
+            }
+          ]
+        },
+        {
+          nomVariation: "Moutarde",
+          options: [
+            {
+              parent: "Moutarde",
+              nomOption: "Peu",
+              prix: 5,
+            },
+            {
+              parent: "Moutarde",
+              nomOption: "Beaucoup",
+              prix: 8,
+            },
+            {
+              parent: "Mayonnaise",
+              nomOption: "Moyen",
+              prix: 2,
+            }
+          ]
+        },
+      ],
   
     },
     {

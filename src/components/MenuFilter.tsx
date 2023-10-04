@@ -97,8 +97,7 @@ function MenuFilter() {
                     {/* <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleAjouterAuPanier(item)} /> */}
                     <MenuDialog menu={item} stateInit={open} stateClose={() => setOpen(false)} />
                 </Grid>
-            ))
-            
+            ))  
         }
             </Grid>
         </MenuFilterContainer>

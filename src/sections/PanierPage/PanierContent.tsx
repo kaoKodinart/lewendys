@@ -30,7 +30,7 @@ function PanierContent() {
     return (
         <PanierContentStyle>
             <CartTable/>
-            <Grid container>
+            {/* <Grid container>
                 {
                     panier.map((item, index) => (
                         <Grid item xs>
@@ -38,7 +38,7 @@ function PanierContent() {
                         </Grid>
                     )
                 )}
-            </Grid>
+            </Grid> */}
         </PanierContentStyle>
     );
 }

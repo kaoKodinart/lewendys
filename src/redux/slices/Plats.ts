@@ -15,11 +15,14 @@ const PlatSlice = createSlice({
     reducers: {
         addPanier(state, action: PayloadAction<PanierItemModel>) {
             state.plats.push(action.payload)
+        },
+        deletePanierItem(state, action: PayloadAction<PanierItemModel>) {
+            state.plats = state.plats.filter(e => e.selectedMenu.uid !== action.payload.selectedMenu.uid)
         }
     },
     extraReducers: (builder) => {
 
     }
 });
-export const {addPanier} = PlatSlice.actions;
+export const {addPanier, deletePanierItem} = PlatSlice.actions;
 export default PlatSlice.reducer;
