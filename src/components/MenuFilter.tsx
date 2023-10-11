@@ -61,10 +61,9 @@ function MenuFilter() {
 
         dispatch(getMenus()).then((res) => console.log(res)).catch(error => {
             console.log(error);
-            
           })
         if (menus.length > 0) {
-          setSelectedCategory(menuItems[0].categorie);
+          setSelectedCategory(menus[0].categorie);
         }
 
         if (firstCategoryButtonRef.current) {
