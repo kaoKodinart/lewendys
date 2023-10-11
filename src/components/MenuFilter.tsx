@@ -4,11 +4,12 @@ import { menuItems } from '../common/Data';
 import { PROJECT_COLORS } from '../common/ProjectConfig';
 import MenuPageItem from './MenuPageItem';
 import MenuDialog from './MenuDialog';
-import { useAppDispatch } from '../redux/store';
+import { RootState, useAppDispatch, useAppSelector } from '../redux/store';
 import { addPanier } from '../redux/slices/Plats';
 import { MenuItemModel } from '../models/MenuItemModel';
 import { MenuModel } from '../models/MenuModel';
 import { PanierItemModel } from '../models/PanierItemModel';
+import { getMenus } from '../redux/slices/Menus';
 
 const MenuFilterContainer = styled("div")(()=>({
     display:"flex",
@@ -38,12 +39,13 @@ const MenuFilterButtonText = styled(Typography)(({theme})=>({
 
 function MenuFilter() {
     const dispatch = useAppDispatch();
+    const menus = useAppSelector((state:RootState) => state.menus.menus);
 
     const [cart, setCart] = useState([]);
 
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     
-    const categories = Array.from(new Set(menuItems.map((item) => item.categorie)));
+    const categories = Array.from(new Set(menus.map((item) => item.categorie)));
     const firstCategoryButtonRef = useRef<HTMLButtonElement | null>(null);
 
     const handleAjouterAuPanier = (plat: PanierItemModel) => {
@@ -56,7 +58,12 @@ function MenuFilter() {
       };
 
       useEffect(() => {
-        if (menuItems.length > 0) {
+
+        dispatch(getMenus()).then((res) => console.log(res)).catch(error => {
+            console.log(error);
+            
+          })
+        if (menus.length > 0) {
           setSelectedCategory(menuItems[0].categorie);
         }
 
@@ -89,7 +96,7 @@ function MenuFilter() {
             ))}
             </Stack>
             <Grid container spacing={1}>
-            {menuItems
+            {menus
             .filter((item) => selectedCategory === null || item.categorie === selectedCategory)
             .map((item) => (
                 <Grid  key={item.uid} xs sx={{display:"grid", placeItems:"center"}}>

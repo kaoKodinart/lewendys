@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import platReducer from "./slices/Plats";
+import menuReducer from "./slices/Menus";
 
 
 export const store = configureStore({
     reducer: {
-        plats: platReducer
+        plats: platReducer,
+        menus: menuReducer,
     },
 });
 
