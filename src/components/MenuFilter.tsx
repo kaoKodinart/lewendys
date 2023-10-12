@@ -45,7 +45,7 @@ function MenuFilter() {
 
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     
-    const categories = Array.from(new Set(menus.map((item) => item.categorie)));
+    const categories = Array.from(new Set(menuItems.map((item) => item.categorie)));
     const firstCategoryButtonRef = useRef<HTMLButtonElement | null>(null);
 
     const handleAjouterAuPanier = (plat: PanierItemModel) => {
@@ -62,8 +62,8 @@ function MenuFilter() {
         dispatch(getMenus()).then((res) => console.log(res)).catch(error => {
             console.log(error);
           })
-        if (menus.length > 0) {
-          setSelectedCategory(menus[0].categorie);
+        if (menuItems.length > 0) {
+          setSelectedCategory(menuItems[0].categorie);
         }
 
         if (firstCategoryButtonRef.current) {
@@ -95,7 +95,7 @@ function MenuFilter() {
             ))}
             </Stack>
             <Grid container spacing={1}>
-            {menus
+            {menuItems
             .filter((item) => selectedCategory === null || item.categorie === selectedCategory)
             .map((item) => (
                 <Grid  key={item.uid} xs sx={{display:"grid", placeItems:"center"}}>
