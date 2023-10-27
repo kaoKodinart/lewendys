@@ -9,20 +9,51 @@ import { useAppDispatch } from "../redux/store";
 import { deletePanierItem } from "../redux/slices/Plats";
 
 
-const CartItemStyle = styled (Card)(()=>({
-    width:"90%",
-    minHeight:"200px",
+const CartItemStyle = styled (Card)(({theme})=>({
+    width:"calc(95% - 40px)",
     display:"flex",
-    flexDirection:"row",
-    alignItems:"center",
-    justifyContent:"flex-start",
-// padding:"30px 0px 30px 0px",
-    backgroundColor:"#F3F5FA",
-    // border:"1px solid #DDDFE3",
-    // justifyContent:"space-evenly",
-    borderRadius:"5px",
+    padding:"20px",
     position:"relative",
+    // minHeight:"300px",
+    [theme.breakpoints.down('md')]: {
+        flexDirection:"column",
+        width:"calc(98% - 40px)",
+       },
+    [theme.breakpoints.down('sm')]: {
+        width:"calc(100% - 40px)",
+       },
+//     width:"90%",
+//     minHeight:"200px",
+//     display:"flex",
+//     flexDirection:"row",
+//     alignItems:"center",
+//     justifyContent:"flex-start",
+// // padding:"30px 0px 30px 0px",
+//     backgroundColor:"#F3F5FA",
+//     // border:"1px solid #DDDFE3",
+//     // justifyContent:"space-evenly",
+//     borderRadius:"5px",
 
+}))
+
+const MenuItemImg = styled("img")(({theme})=> ({
+    width: 175,
+    height:175,
+    borderRadius:"10px",
+    objectFit:"cover",
+    // backgroundColor:"green",
+    [theme.breakpoints.down('md')]: {
+        width:"100%",
+        height:"200px",
+        // borderRadius:"50px",
+       },
+}))
+
+const ContentBox = styled(Box)(({theme})=> ({
+    margin:"0px 0px 0px 10px",
+    [theme.breakpoints.down('md')]: {
+        margin:"10px 0px 0px 0px",
+       },
 }))
 
 const CircularPhotoContainer = styled (Box)(()=>({
@@ -81,10 +112,11 @@ function CartItem({itemModel}: Props) {
 
     return (
         <CartItemStyle>
-            <CircularPhotoContainer>
+            <MenuItemImg src={itemModel.selectedMenu.image}/>
+            {/* <CircularPhotoContainer>
                 <Avatar sx={{ width: 175, height: 175 }}  src={itemModel.selectedMenu.image} variant="rounded"/>
-            </CircularPhotoContainer>
-            <InfoPart>
+            </CircularPhotoContainer> */}
+            <ContentBox>
                 <CartItemName>{itemModel.selectedMenu.nomMenu}- {itemModel.selectedMenu.prix}$</CartItemName>
                     
                     {/* {itemModel.selectedMenu.prix!} */}
@@ -102,7 +134,7 @@ function CartItem({itemModel}: Props) {
                     <DeleteButton onClick={() => deleteItem(itemModel)}>
                         <DeleteForeverOutlined/>
                     </DeleteButton>
-            </InfoPart>
+            </ContentBox>
         </CartItemStyle>
     );
 }

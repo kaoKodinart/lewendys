@@ -2,6 +2,10 @@ import { Box, Grid, Typography, styled } from '@mui/material';
 import { RootState, useAppSelector } from '../redux/store';
 import CartItem from './CartItem';
 import { PanierItemModel } from '../models/PanierItemModel';
+import PanierItem from './PanierItem';
+import MyButtonCoffe from './MyButtonCoffe';
+import { Link } from 'react-router-dom';
+import { USER_PAGES } from '../routes/path';
 
 const CartTableContent = styled(Box)(()=>({
     width:"100%",
@@ -35,6 +39,11 @@ const CartTablePanier = styled(Typography)(()=>({
     // color:"#CC1B1B",
     fontSize:"1.3em",
 }));
+const CartFoot = styled("div")(()=>({
+    width:"100%",
+    display:"flex",
+    justifyContent:"flex-end",
+}));
 
 function CartTable() {
     const panier = useAppSelector((state: RootState) => state.plats.plats);
@@ -53,7 +62,7 @@ function CartTable() {
     return (
         <CartTableContent>
                 
-            <Grid container rowSpacing={3}>
+            {/* <Grid container rowSpacing={3}> */}
                 {panier.length === 0 ? (
                     <CartItemPricedf>
                         <CartItemPrice>Panier vide</CartItemPrice>
@@ -64,19 +73,26 @@ function CartTable() {
                             <CartTablePanier>Panier</CartTablePanier>
                             <CartTablePrice>{calculateTotalPrice(panier)}$</CartTablePrice>
                         </Entete>
+                        <Grid container spacing={2}>
                         {
                             panier.map((e, index) => (
-                                <div style={{width:"100%"}}>
+                                // <div style={{width:"100%"}}>
                                 <Grid item lg={6} md={6} sm={12} xs={12} key={index}>
                                     <CartItem itemModel={e} />
                                 </Grid>
-                                </div>
+                                // </div>
                             ))
                         }
+                        </Grid>
+                        <CartFoot>
+                            <Link to={USER_PAGES.checkout}>
+                                <MyButtonCoffe text='Commander' />
+                            </Link>
+                        </CartFoot>
                     </div>
                 )
                 }
-            </Grid>
+            {/* </Grid> */}
         </CartTableContent>
     );
 }

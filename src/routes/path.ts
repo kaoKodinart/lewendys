@@ -10,5 +10,6 @@ export const USER_PAGES = {
     contact:"/contact",
     reservation:"/reservation",
     panier:"/panier",
+    checkout:"/checkout",
     // blogsDetail:"/blogsDetail/:id",
 };
