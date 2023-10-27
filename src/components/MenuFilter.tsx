@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Stack, Typography, styled } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
-import { menuItems } from '../common/Data';
+// import { menus } from '../common/Data';
 import { PROJECT_COLORS } from '../common/ProjectConfig';
 import MenuPageItem from './MenuPageItem';
 import MenuDialog from './MenuDialog';
@@ -45,7 +45,7 @@ function MenuFilter() {
 
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     
-    const categories = Array.from(new Set(menuItems.map((item) => item.categorie)));
+    const categories = Array.from(new Set(menus.map((item) => item.categorie)));
     const firstCategoryButtonRef = useRef<HTMLButtonElement | null>(null);
 
     const handleAjouterAuPanier = (plat: PanierItemModel) => {
@@ -62,8 +62,8 @@ function MenuFilter() {
         dispatch(getMenus()).then((res) => console.log(res)).catch(error => {
             console.log(error);
           })
-        if (menuItems.length > 0) {
-          setSelectedCategory(menuItems[0].categorie);
+        if (menus.length > 0) {
+          setSelectedCategory(menus[0].categorie);
         }
 
         if (firstCategoryButtonRef.current) {
@@ -95,11 +95,11 @@ function MenuFilter() {
             ))}
             </Stack>
             <Grid container spacing={1}>
-            {menuItems
+            {menus
             .filter((item) => selectedCategory === null || item.categorie === selectedCategory)
             .map((item) => (
                 <Grid  key={item.uid} xs sx={{display:"grid", placeItems:"center"}}>
-                    <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleOpenDialog(item)} />
+                    <MenuPageItem  image={`http://localhost:8000/api/images/${item.image}`} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleOpenDialog(item)} />
                     {/* <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleAjouterAuPanier(item)} /> */}
                     <MenuDialog menu={item} stateInit={open} stateClose={() => setOpen(false)} />
                 </Grid>
