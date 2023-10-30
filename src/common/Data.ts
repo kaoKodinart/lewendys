@@ -15,7 +15,7 @@ export const homeAboutDetails = [
     }
 ];
 
-export const menuItems: MenuModel[] = [
+export const menus: MenuModel[] = [
 
     {
       uid: 2,

@@ -1,6 +1,10 @@
-import { Box, Grid, MenuItem, TextField, Typography, styled } from "@mui/material";
+import { Box, Button, FormControlLabel, Grid, MenuItem, Radio, RadioGroup, TextField, Typography, styled } from "@mui/material";
 import SectionStyle from "../../Styles/SectionStyle";
 import { useState } from "react";
+import MyButtonCoffe from "../../components/MyButtonCoffe";
+import { RootState, useAppSelector } from "../../redux/store";
+import React from "react";
+import { CommandeModel } from "../../models/CommandeModel";
 
 const CheckoutContentStyle = styled(SectionStyle)(({theme}) => ({
     
@@ -40,7 +44,21 @@ const TextFieldStyle=styled(TextField)(()=>({
    
 }));
 function CheckoutContent() {
+    const [commandeData, setCommandeData] = React.useState<CommandeModel>();
+
+const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCommandeData((prev) => ({...prev, [e.target.name]: e.target.value} as CommandeModel));
+    console.log(commandeData);
+   };
+    const panier = useAppSelector((state: RootState) => state.plats.plats);
     const [payementType, setpayementType] = useState('');
+    const [payementMode, setPayementMode] = useState('');
+
+    const handleSetpayementMode = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPayementMode(()=> (e.target.value))
+        console.log(payementMode);
+        
+    }
 
     return (
         <CheckoutContentStyle>
@@ -49,9 +67,11 @@ function CheckoutContent() {
                 <MenuItem value={"A emporter"}>A emporter</MenuItem>
                 <MenuItem value={"Livraison a domicile"}>Livraison a domicile</MenuItem>
             </TextFieldStyle>
+            <Box sx={{mt:3}} component={"form"}>
             {
                 payementType == "Consommer Sur Place" && (
-                    <Box sx={{mt:3}}>
+                    <Box>
+                        <Typography>Description de la methode de livraison</Typography>
                         <Grid container spacing={3}>
                             <Grid item lg={4} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
                                 <TextFieldStyle name="name"  variant="outlined" label={"Nom et Prénoms"} required={true} type="text" fullWidth sx={{color:"white"}}/>
@@ -71,7 +91,8 @@ function CheckoutContent() {
             }
             {
                payementType == "A emporter" && (
-                <Box sx={{mt:3}}>
+                <Box >
+                    <Typography>Description de la methode de livraison</Typography>
                     <Grid container spacing={3}>
                         <Grid item lg={6} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
                             <TextFieldStyle name="name"  variant="outlined" label={"Nom et Prénoms"} required={true} type="text" fullWidth sx={{color:"white"}}/>
@@ -94,11 +115,56 @@ function CheckoutContent() {
             }
             {
                payementType == "Livraison a domicile" && (
-                    <Box>
-                        Livraison a domicile
-                    </Box>
+                <Box >
+                    <Typography>Description de la methode de livraison</Typography>
+                    <Grid container spacing={3}>
+                        <Grid item lg={4} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
+                            <TextFieldStyle name="name"  variant="outlined" label={"Nom et Prénoms"} required={true} type="text" fullWidth sx={{color:"white"}}/>
+                        </Grid>
+                        <Grid item lg={4} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
+                            <TextFieldStyle name="email"  variant="outlined" label={"Téléphone"} type="tel" required={true} fullWidth/>
+                        </Grid>
+                        <Grid item lg={4} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
+                            <TextFieldStyle name="email"  variant="outlined" label={"Email"} type="text" required={true} fullWidth/>
+                        </Grid>
+                        <Grid item lg={6} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
+                            <TextFieldStyle name="email"  variant="outlined" label={"Ville"} type="text" required={true} fullWidth/>
+                        </Grid>
+                        <Grid item lg={6} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
+                            <TextFieldStyle name="name"  variant="outlined" label={"Adresse"} required={true} type="text" fullWidth sx={{color:"white"}}/>
+                        </Grid>
+                        <Grid item lg={12} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
+                            <TextFieldStyle name="email"  variant="outlined" label={"Quelques Détailles"} type="text" required={true} fullWidth multiline rows={5}/>
+                        </Grid>
+                    </Grid>
+                </Box>
                ) 
             }
+            <RadioGroup row name="Carnet_de_Vaccination" value={payementMode} onChange={handleSetpayementMode}>
+                <FormControlLabel value="Paypal" control={<Radio />} label="Paypal" />
+                <FormControlLabel value="Stripe" control={<Radio />} label="Stripe" />
+            </RadioGroup>
+            {payementMode === "Stripe" && (
+                <Grid container spacing={3} sx={{mt:0, mb:2}}>
+                        <Grid item lg={3} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
+                            <TextFieldStyle name="name"  variant="outlined" label={"Numero de la carte"} required={true} type="text" fullWidth sx={{color:"white"}}/>
+                        </Grid>
+                        <Grid item lg={3} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
+                            <TextFieldStyle name="email"  variant="outlined" label={"CVC"} type="tel" required={true} fullWidth/>
+                        </Grid>
+                        <Grid item lg={3} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
+                            <TextFieldStyle name="name"  variant="outlined" label={"Mois"} required={true} type="text" fullWidth sx={{color:"white"}}/>
+                        </Grid>
+                        <Grid item lg={3} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
+                            <TextFieldStyle name="email"  variant="outlined" label={"Année"} type="text" required={true} fullWidth/>
+                        </Grid>
+                </Grid>
+            ) }
+            <Button onClick={()=> console.log(panier)}>
+                test
+            </Button>
+            <MyButtonCoffe text={"Valider"}/>
+            </Box>
         </CheckoutContentStyle>
     );
 }

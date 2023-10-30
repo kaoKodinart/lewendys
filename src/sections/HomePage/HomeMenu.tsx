@@ -1,7 +1,6 @@
 import { Grid, Typography, styled } from "@mui/material";
 import SectionStyle from "../../Styles/SectionStyle";
 import { PROJECT_COLORS } from "../../common/ProjectConfig";
-import { menuItems } from "../../common/Data";
 import MenuItem from "../../components/MenuItem";
 import MyButtonBlack from "../../components/MyButtonBlack";
 
@@ -59,11 +58,11 @@ function HomeMenu() {
             <HomeMenuLittleTitle>NOTRE MENU</HomeMenuLittleTitle>
             <HomeMenuSubText>Lorem ipsum dolor sit amet consectetur. In tellus integer pretium potenti ut odio a lectus eu. Sapien velit non cursus leo consectetur. At at donec in nec.</HomeMenuSubText>
             <Grid container spacing={3}>
-            {menuItems.map((item) => (
+            {/* {menus.map((item) => (
                 <Grid item key={item.id} xs={12} sm={6} md={4} lg={4} sx={{display:"grid", placeItems:"center"}}>
                     <MenuItem image={item.image} id={item.id} nom={item.name} description={item.desc} prix={item.price} />
                 </Grid>
-            ))}
+            ))} */}
             </Grid>
             <MyButtonBlack text="Voir Plus" sx={{padding:"10px 30px", mt:5}}/>
         </HomeMenuContainer>

@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Stack, Typography, styled } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
-// import { menus } from '../common/Data';
+import { menus } from '../common/Data';
 import { PROJECT_COLORS } from '../common/ProjectConfig';
 import MenuPageItem from './MenuPageItem';
 import MenuDialog from './MenuDialog';
@@ -39,7 +39,7 @@ const MenuFilterButtonText = styled(Typography)(({theme})=>({
 
 function MenuFilter() {
     const dispatch = useAppDispatch();
-    const menus = useAppSelector((state:RootState) => state.menus.menus);
+    // const menus = useAppSelector((state:RootState) => state.menus.menus);
 
     const [cart, setCart] = useState([]);
 
@@ -99,8 +99,8 @@ function MenuFilter() {
             .filter((item) => selectedCategory === null || item.categorie === selectedCategory)
             .map((item) => (
                 <Grid  key={item.uid} xs sx={{display:"grid", placeItems:"center"}}>
-                    <MenuPageItem  image={`http://localhost:8000/api/images/${item.image}`} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleOpenDialog(item)} />
-                    {/* <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleAjouterAuPanier(item)} /> */}
+                    {/* <MenuPageItem  image={`http://localhost:8000/api/images/${item.image}`} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleOpenDialog(item)} /> */}
+                    <MenuPageItem  image={item.image} id={item.uid} nom={item.nomMenu} description={item.description} prix={item.prix} cliqFunc={() => handleOpenDialog(item)} />
                     <MenuDialog menu={item} stateInit={open} stateClose={() => setOpen(false)} />
                 </Grid>
             ))  

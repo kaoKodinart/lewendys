@@ -42,20 +42,20 @@ const MenuItemTitle = styled(Typography)(({theme})=> ({
     [theme.breakpoints.down('sm')]: {
        },
 }))
-const MenuItemPrice = styled(Typography)(({theme})=> ({
-    color: PROJECT_COLORS.Yellow,
-    fontSize:"2.1em",
-    // lineHeight:"1em",
-    fontFamily:"HelveticaBold, sans-serif !important",
-    [theme.breakpoints.down('sm')]: {
-       },
-}))
-const MenuItemListItem = styled(Typography)(({theme})=> ({
-    fontFamily:"RalewayMedium, sans-serif !important",
-    fontSize:"1.0em",
-    [theme.breakpoints.down('sm')]: {
-       },
-}))
+// const MenuItemPrice = styled(Typography)(({theme})=> ({
+//     color: PROJECT_COLORS.Yellow,
+//     fontSize:"2.1em",
+//     // lineHeight:"1em",
+//     fontFamily:"HelveticaBold, sans-serif !important",
+//     [theme.breakpoints.down('sm')]: {
+//        },
+// }))
+// const MenuItemListItem = styled(Typography)(({theme})=> ({
+//     fontFamily:"RalewayMedium, sans-serif !important",
+//     fontSize:"1.0em",
+//     [theme.breakpoints.down('sm')]: {
+//        },
+// }))
 const ContentBox = styled(Box)(({theme})=> ({
     margin:"0px 0px 0px 10px",
     [theme.breakpoints.down('md')]: {
@@ -76,11 +76,11 @@ interface Props {
 
 function PanierItem({itemModel}: Props) {
     const dispatch = useAppDispatch();
-    const [quantity, setQuantity] = useState(1);
+    // const [quantity, setQuantity] = useState(1);
 
-    const deleteItem = (plat: PanierItemModel) => {
-        dispatch(deletePanierItem(plat))
-      };
+    // const deleteItem = (plat: PanierItemModel) => {
+    //     dispatch(deletePanierItem(plat))
+    //   };
     return (
         <MenuItemStyle>
                 <MenuItemImg src={itemModel.selectedMenu.image}/>
@@ -90,7 +90,7 @@ function PanierItem({itemModel}: Props) {
                         {/* <MenuItemPrice>27,50£</MenuItemPrice> */}
                         <List>
                         {itemModel.variation.map((e, index) => (
-                            <ListItem >
+                            <ListItem key={index}>
                                 <div><CartItemDesc>{e.parent}({e.nomOption})-{e.prix}$</CartItemDesc></div>
                             </ListItem>
                         ))}

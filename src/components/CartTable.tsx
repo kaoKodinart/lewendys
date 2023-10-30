@@ -2,7 +2,6 @@ import { Box, Grid, Typography, styled } from '@mui/material';
 import { RootState, useAppSelector } from '../redux/store';
 import CartItem from './CartItem';
 import { PanierItemModel } from '../models/PanierItemModel';
-import PanierItem from './PanierItem';
 import MyButtonCoffe from './MyButtonCoffe';
 import { Link } from 'react-router-dom';
 import { USER_PAGES } from '../routes/path';
