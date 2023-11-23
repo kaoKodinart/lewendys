@@ -9,6 +9,7 @@ import AboutPage from '../pages/AboutPage';
 import ContactPage from '../pages/ContactPage';
 import ReservationPage from '../pages/ReservationPage';
 import PanierPage from '../pages/PanierPage';
+import CheckOutPage from '../pages/CheckOutPage';
 
 
 
@@ -38,6 +39,7 @@ export default function Router() {
                 {path: USER_PAGES.contact, element: <ContactPage/>},
                 {path: USER_PAGES.reservation, element: <ReservationPage/>},
                 {path: USER_PAGES.panier, element: <PanierPage/>},
+                {path: USER_PAGES.checkout, element: <CheckOutPage/>},
             ]
         },
 
