@@ -7,5 +7,5 @@ export interface MenuModel {
     categorie: string,
     description: string,
     variations: Array<VariationModel>,
-    uid: number,
+    id: number,
 }

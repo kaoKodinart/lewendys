@@ -17,7 +17,7 @@ const PlatSlice = createSlice({
             state.plats.push(action.payload)
         },
         deletePanierItem(state, action: PayloadAction<PanierItemModel>) {
-            state.plats = state.plats.filter(e => e.selectedMenu.uid !== action.payload.selectedMenu.uid)
+            state.plats = state.plats.filter(e => e.selectedMenu.id !== action.payload.selectedMenu.id)
         }
     },
     extraReducers: (builder) => {
