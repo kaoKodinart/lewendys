@@ -5,6 +5,7 @@ import MyButtonCoffe from "../../components/MyButtonCoffe";
 import { RootState, useAppSelector } from "../../redux/store";
 import React from "react";
 import { CommandeModel } from "../../models/CommandeModel";
+import { sendCommandeData } from "../../services/http/commandeHttp";
 
 const CheckoutContentStyle = styled(SectionStyle)(({theme}) => ({
     
@@ -45,6 +46,19 @@ const TextFieldStyle=styled(TextField)(()=>({
 }));
 function CheckoutContent() {
     const [commandeData, setCommandeData] = React.useState<CommandeModel>();
+    const validate = () => {
+        const formData = new FormData();
+        formData.append('panier', JSON.stringify(panier));
+        
+        if (formData) {
+            sendCommandeData(formData, {'Content-Type': 'multipart/form-data',})
+         //    console.log(photo);      
+            // console.log(formData);
+            console.log(commandeData);
+            console.log(JSON.stringify(commandeData?.panier));
+
+     }           
+ }
 
 const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommandeData((prev) => ({...prev, [e.target.name]: e.target.value} as CommandeModel));
@@ -160,7 +174,8 @@ const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
                         </Grid>
                 </Grid>
             ) }
-            <Button onClick={()=> console.log(panier)}>
+            <Button onClick={()=> validate()}>
+            {/* <Button onClick={()=> console.log(panier)}> */}
                 test
             </Button>
             <MyButtonCoffe text={"Valider"}/>
