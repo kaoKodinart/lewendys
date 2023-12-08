@@ -47,8 +47,10 @@ const TextFieldStyle=styled(TextField)(()=>({
 function CheckoutContent() {
     const [commandeData, setCommandeData] = React.useState<CommandeModel>();
     const validate = () => {
+        const prixPanier = panier.map((item) => item.prixFinal).reduce((previousValue, currentValue) => previousValue + currentValue, 0)
         const formData = new FormData();
         formData.append('panier', JSON.stringify(panier));
+        // formData.append('panierPrice', (prixPanier));
         
         if (formData) {
             sendCommandeData(formData, {'Content-Type': 'multipart/form-data',})
@@ -76,6 +78,7 @@ const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
 
     return (
         <CheckoutContentStyle>
+            <div className="carouse"></div>
             <TextFieldStyle defaultValue={""} name='typeDevis' select value={payementType} onChange={(e) => setpayementType(e.target.value)} label="Selectioner le mode de Payement" fullWidth>
                 <MenuItem value={"Consommer Sur Place"}>Consommer Sur Place</MenuItem>
                 <MenuItem value={"A emporter"}>A emporter</MenuItem>
