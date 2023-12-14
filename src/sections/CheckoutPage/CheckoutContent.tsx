@@ -47,17 +47,21 @@ const TextFieldStyle=styled(TextField)(()=>({
 function CheckoutContent() {
     const [commandeData, setCommandeData] = React.useState<CommandeModel>();
     const validate = () => {
-        const prixPanier = panier.map((item) => item.prixFinal).reduce((previousValue, currentValue) => previousValue + currentValue, 0)
+        const prixPanier = panier.map((item) => item.prixFinal).reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+        console.log(prixPanier);
+        const prixPanierString: string = prixPanier.toString();
+        console.log(prixPanierString+"Dollars");
+
         const formData = new FormData();
         formData.append('panier', JSON.stringify(panier));
-        // formData.append('panierPrice', (prixPanier));
+        formData.append('panierPrice', prixPanierString);
         
         if (formData) {
             sendCommandeData(formData, {'Content-Type': 'multipart/form-data',})
          //    console.log(photo);      
             // console.log(formData);
-            console.log(commandeData);
-            console.log(JSON.stringify(commandeData?.panier));
+            // console.log(commandeData);
+            // console.log(JSON.stringify(commandeData?.panier));
 
      }           
  }
