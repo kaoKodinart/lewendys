@@ -1,13 +1,11 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Stack, Typography, styled } from '@mui/material';
+import { Button, Dialog, DialogContent, DialogTitle, Grid, Stack, Typography, styled } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
-import { menus } from '../common/Data';
+// import { menus } from '../common/Data';
 import { PROJECT_COLORS } from '../common/ProjectConfig';
 import MenuPageItem from './MenuPageItem';
 import MenuDialog from './MenuDialog';
-import { RootState, useAppDispatch, useAppSelector } from '../redux/store';
+import { RootState, useAppDispatch, useAppSelector} from '../redux/store';
 import { addPanier } from '../redux/slices/Plats';
-import { MenuItemModel } from '../models/MenuItemModel';
-import { MenuModel } from '../models/MenuModel';
 import { PanierItemModel } from '../models/PanierItemModel';
 import { getMenus } from '../redux/slices/Menus';
 
@@ -39,7 +37,7 @@ const MenuFilterButtonText = styled(Typography)(({theme})=>({
 
 function MenuFilter() {
     const dispatch = useAppDispatch();
-    // const menus = useAppSelector((state:RootState) => state.menus.menus);
+    const menus = useAppSelector((state:RootState) => state.menus.menus);
 
     const [cart, setCart] = useState([]);
 

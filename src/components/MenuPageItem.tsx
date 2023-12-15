@@ -1,6 +1,8 @@
 import { Box, Card, CardContent, CardMedia, Typography, styled } from '@mui/material';
 import Fade from '../animations/Fade';
 import FadeVariants from '../variants/FadeVariants';
+import MenuDialog from './MenuDialog';
+import { MenuModel } from '../models/MenuModel';
 
 const MenuItemStyle = styled(Card)(()=>({
     width:"calc(350px - 20px)",
@@ -38,11 +40,16 @@ interface Props {
     nom: string,
     description: string,
     prix: number,
-    cliqFunc?: Function
+    cliqFunc?: Function,
+    // menu: MenuModel,
+    // stateInit: boolean,
+    // stateClose: ()=>void,
+    // cliqFunc?: Function
 }
 
 function MenuPageItem({image, id, nom, description, prix, cliqFunc}:Props) {
     return (
+        <>
         <Fade variants={FadeVariants({durationIn: 1}).in}>
             <MenuItemStyle key={id} onClick={()=> {if (cliqFunc !== null ){cliqFunc!()}}}>
                 <CardMedia
@@ -62,6 +69,9 @@ function MenuPageItem({image, id, nom, description, prix, cliqFunc}:Props) {
                 </Box>
             </MenuItemStyle>
         </Fade>
+        {/* <MenuDialog menu={item} stateInit={open} stateClose={() => setOpen(false)} /> */}
+
+        </>
     );
 }
 

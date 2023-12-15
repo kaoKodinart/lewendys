@@ -18,7 +18,7 @@ export const homeAboutDetails = [
 export const menus: MenuModel[] = [
 
     {
-      uid: 2,
+      id: 2,
       categorie: 'Breakfast',
       nomMenu: 'TACOS',
       prix: 10,
@@ -69,7 +69,7 @@ export const menus: MenuModel[] = [
   
     },
     {
-      uid: 3,
+      id: 3,
       categorie: 'Tasty Donuts',
       nomMenu: 'BURGUER',
       prix: 16,
@@ -120,7 +120,7 @@ export const menus: MenuModel[] = [
   
     },
     {
-      uid: 4,
+      id: 4,
       categorie: 'Chocolat Cake',
       nomMenu: 'SALADE',
       prix: 12,
@@ -129,7 +129,7 @@ export const menus: MenuModel[] = [
       variations: [],
     },
     {
-      uid: 5,
+      id: 5,
       categorie: 'Chocolat Cake',
       nomMenu: 'SALADE',
       prix: 12,

@@ -112,7 +112,8 @@ function CartItem({itemModel}: Props) {
 
     return (
         <CartItemStyle>
-            <MenuItemImg src={itemModel.selectedMenu.image}/>
+            {/* <MenuItemImg src={itemModel.selectedMenu.image}/> */}
+            <MenuItemImg src={`http://localhost:8000/api/images/${itemModel.selectedMenu.image}`}/>
             {/* <CircularPhotoContainer>
                 <Avatar sx={{ width: 175, height: 175 }}  src={itemModel.selectedMenu.image} variant="rounded"/>
             </CircularPhotoContainer> */}
