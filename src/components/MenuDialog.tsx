@@ -52,7 +52,7 @@ function MenuDialog({menu, stateInit, stateClose, cliqFunc}: Props) {
       };
 
       const calculateTotalPrice = () => {
-        let totalPrice = menu.prix;
+        let totalPrice = +menu.prix;
     
         // Ajouter le prix des options sélectionnées
         selectedOptions.forEach((option) => {
