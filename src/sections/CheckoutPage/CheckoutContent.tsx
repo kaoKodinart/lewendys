@@ -59,7 +59,7 @@ function CheckoutContent() {
         if (formData) {
             sendCommandeData(formData, {'Content-Type': 'multipart/form-data',})
          //    console.log(photo);      
-            // console.log(formData);
+            console.log(panier);
             // console.log(commandeData);
             // console.log(JSON.stringify(commandeData?.panier));
 
