@@ -13,4 +13,5 @@ export interface CommandeModel {
     dateRetrait: string,
     heureRetrait: string,
     detailsComment: string,
+    commandeStatut: boolean
 } 
