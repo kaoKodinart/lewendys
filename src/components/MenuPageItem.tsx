@@ -3,6 +3,7 @@ import Fade from '../animations/Fade';
 import FadeVariants from '../variants/FadeVariants';
 import MenuDialog from './MenuDialog';
 import { MenuModel } from '../models/MenuModel';
+import { useState } from 'react';
 
 const MenuItemStyle = styled(Card)(()=>({
     width:"calc(350px - 20px)",
@@ -41,17 +42,23 @@ interface Props {
     description: string,
     prix: number,
     cliqFunc?: Function,
-    // menu: MenuModel,
-    // stateInit: boolean,
-    // stateClose: ()=>void,
+    menu: MenuModel,
+    stateInit: boolean,
+    stateClose: ()=>void,
     // cliqFunc?: Function
 }
 
-function MenuPageItem({image, id, nom, description, prix, cliqFunc}:Props) {
+function MenuPageItem({image, id, nom, description, prix, cliqFunc, menu}:Props) {
+    const [open, setOpen] = useState(false);
+    const handleOpenDialog = (dish : any) => {
+        setOpen(true);
+      };
+
     return (
         <>
-        <Fade variants={FadeVariants({durationIn: 1}).in}>
-            <MenuItemStyle key={id} onClick={()=> {if (cliqFunc !== null ){cliqFunc!()}}}>
+        <Fade variants={FadeVariants({durationIn: 1}).inUp}>
+            {/* <MenuItemStyle key={id} onClick={()=> {if (cliqFunc !== null ){cliqFunc!()}}}> */}
+            <MenuItemStyle key={id} onClick={()=> {handleOpenDialog(menu)}}>
                 <CardMedia
                 sx={{borderRadius:"10px",  width:155, objectFit:"cover"}}
                 component="img"
@@ -68,8 +75,8 @@ function MenuPageItem({image, id, nom, description, prix, cliqFunc}:Props) {
                     </CardContent>
                 </Box>
             </MenuItemStyle>
+        <MenuDialog menu={menu} stateInit={open} stateClose={() => setOpen(false)} />
         </Fade>
-        {/* <MenuDialog menu={item} stateInit={open} stateClose={() => setOpen(false)} /> */}
 
         </>
     );

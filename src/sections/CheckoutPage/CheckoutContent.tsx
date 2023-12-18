@@ -55,6 +55,16 @@ function CheckoutContent() {
         const formData = new FormData();
         formData.append('panier', JSON.stringify(panier));
         formData.append('panierPrice', prixPanierString);
+        formData.append('nomClient', commandeData?.nomClient!);
+        formData.append('adresse', commandeData?.adresse!);
+        formData.append('dateRetrait', commandeData?.dateRetrait!);
+        formData.append('detailsComment', commandeData?.detailsComment!);
+        formData.append('emailClient', commandeData?.emailClient!);
+        formData.append('heureRetrait', commandeData?.heureRetrait!);
+        formData.append('modePaiement', commandeData?.modePaiement!);
+        formData.append('numTable', commandeData?.numTable!);
+        formData.append('telephoneClient', commandeData?.telephoneClient!);
+        formData.append('ville', commandeData?.ville!);
         
         if (formData) {
             sendCommandeData(formData, {'Content-Type': 'multipart/form-data',})
@@ -80,6 +90,11 @@ const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
         
     }
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCommandeData((prev) => ({...prev, [e.target.name]: e.target.value} as CommandeModel));
+        console.log(commandeData);
+      };
+
     return (
         <CheckoutContentStyle>
             <div className="carouse"></div>
@@ -95,16 +110,16 @@ const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
                         <Typography>Description de la methode de livraison</Typography>
                         <Grid container spacing={3}>
                             <Grid item lg={4} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                                <TextFieldStyle name="name"  variant="outlined" label={"Nom et Prénoms"} required={true} type="text" fullWidth sx={{color:"white"}}/>
+                                <TextFieldStyle name="nomClient"  variant="outlined" label={"Nom et Prénoms"} required={true} type="text" fullWidth sx={{color:"white"}} value={commandeData?.nomClient ?? ""}/>
                             </Grid>
                             <Grid item lg={4} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                                <TextFieldStyle name="email"  variant="outlined" label={"Téléphone"} type="tel" required={true} fullWidth/>
+                                <TextFieldStyle name="telephoneClient"  variant="outlined" label={"Téléphone"} type="tel" required={true} fullWidth value={commandeData?.telephoneClient ?? ""}/>
                             </Grid>
                             <Grid item lg={4} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                                <TextFieldStyle name="email"  variant="outlined" label={"Numéro de Table"} type="text" required={true} fullWidth/>
+                                <TextFieldStyle name="numTable"  variant="outlined" label={"Numéro de Table"} type="text" required={true} fullWidth value={commandeData?.numTable ?? ""}/>
                             </Grid>
                             <Grid item lg={12} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                                <TextFieldStyle name="email"  variant="outlined" label={"Quelques Détailles"} type="text" required={true} fullWidth multiline rows={5}/>
+                                <TextFieldStyle name="detailsComment"  variant="outlined" label={"Quelques Détailles"} type="text" required={true} fullWidth multiline rows={5} value={commandeData?.detailsComment ?? ""}/>
                             </Grid>
                         </Grid>
                     </Box>
@@ -116,19 +131,19 @@ const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
                     <Typography>Description de la methode de livraison</Typography>
                     <Grid container spacing={3}>
                         <Grid item lg={6} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="name"  variant="outlined" label={"Nom et Prénoms"} required={true} type="text" fullWidth sx={{color:"white"}}/>
+                            <TextFieldStyle name="name"  variant="outlined" label={"Nom et Prénoms"} required={true} type="text" fullWidth sx={{color:"white"}} value={commandeData?.nomClient ?? ""}/>
                         </Grid>
                         <Grid item lg={6} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="email"  variant="outlined" label={"Téléphone"} type="tel" required={true} fullWidth/>
+                            <TextFieldStyle name="telephoneClient"  variant="outlined" label={"Téléphone"} type="tel" required={true} fullWidth value={commandeData?.telephoneClient ?? ""}/>
                         </Grid>
                         <Grid item lg={6} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="name"  variant="outlined" label={"Date de retrait"} required={true} type="date" fullWidth sx={{color:"white"}}/>
+                            <TextFieldStyle name="dateRetrait"  variant="outlined" label={"Date de retrait"} required={true} type="date" fullWidth sx={{color:"white"}} value={commandeData?.dateRetrait ?? ""}/>
                         </Grid>
                         <Grid item lg={6} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="email"  variant="outlined" label={"Heure de Retrait"} type="time" required={true} fullWidth/>
+                            <TextFieldStyle name="heureRetrait"  variant="outlined" label={"Heure de Retrait"} type="time" required={true} fullWidth value={commandeData?.heureRetrait ?? ""}/>
                         </Grid>
                         <Grid item lg={12} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="email"  variant="outlined" label={"Quelques Détailles"} type="text" required={true} fullWidth multiline rows={5}/>
+                            <TextFieldStyle name="detailsComment"  variant="outlined" label={"Quelques Détailles"} type="text" required={true} fullWidth multiline rows={5} value={commandeData?.detailsComment ?? ""}/>
                         </Grid>
                     </Grid>
                 </Box>
@@ -139,23 +154,23 @@ const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
                 <Box >
                     <Typography>Description de la methode de livraison</Typography>
                     <Grid container spacing={3}>
-                        <Grid item lg={4} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="name"  variant="outlined" label={"Nom et Prénoms"} required={true} type="text" fullWidth sx={{color:"white"}}/>
-                        </Grid>
-                        <Grid item lg={4} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="email"  variant="outlined" label={"Téléphone"} type="tel" required={true} fullWidth/>
-                        </Grid>
-                        <Grid item lg={4} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="email"  variant="outlined" label={"Email"} type="text" required={true} fullWidth/>
+                    <Grid item lg={6} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
+                            <TextFieldStyle name="name"  variant="outlined" label={"Nom et Prénoms"} required={true} type="text" fullWidth sx={{color:"white"}} value={commandeData?.nomClient ?? ""}/>
                         </Grid>
                         <Grid item lg={6} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="email"  variant="outlined" label={"Ville"} type="text" required={true} fullWidth/>
+                            <TextFieldStyle name="telephoneClient"  variant="outlined" label={"Téléphone"} type="tel" required={true} fullWidth value={commandeData?.telephoneClient ?? ""}/>
+                        </Grid>
+                        <Grid item lg={4} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
+                            <TextFieldStyle name="emailClient"  variant="outlined" label={"Email"} type="text" required={true} fullWidth value={commandeData?.emailClient ?? ""}/>
                         </Grid>
                         <Grid item lg={6} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="name"  variant="outlined" label={"Adresse"} required={true} type="text" fullWidth sx={{color:"white"}}/>
+                            <TextFieldStyle name="ville"  variant="outlined" label={"Ville"} type="text" required={true} fullWidth value={commandeData?.ville ?? ""}/>
+                        </Grid>
+                        <Grid item lg={6} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
+                            <TextFieldStyle name="adresse"  variant="outlined" label={"Adresse"} required={true} type="text" fullWidth value={commandeData?.adresse ?? ""} sx={{color:"white"}}/>
                         </Grid>
                         <Grid item lg={12} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="email"  variant="outlined" label={"Quelques Détailles"} type="text" required={true} fullWidth multiline rows={5}/>
+                            <TextFieldStyle name="detailsComment"  variant="outlined" label={"Quelques Détailles"} type="text" required={true} fullWidth multiline rows={5} value={commandeData?.detailsComment ?? ""}/>
                         </Grid>
                     </Grid>
                 </Box>
@@ -168,16 +183,16 @@ const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
             {payementMode === "Stripe" && (
                 <Grid container spacing={3} sx={{mt:0, mb:2}}>
                         <Grid item lg={3} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="name"  variant="outlined" label={"Numero de la carte"} required={true} type="text" fullWidth sx={{color:"white"}}/>
+                            <TextFieldStyle name="name"  variant="outlined" label={"Numero de la carte"} required={true} type="text" fullWidth  sx={{color:"white"}}/>
                         </Grid>
                         <Grid item lg={3} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="email"  variant="outlined" label={"CVC"} type="tel" required={true} fullWidth/>
+                            <TextFieldStyle name="email"  variant="outlined" label={"CVC"} type="text" required={true} fullWidth />
                         </Grid>
                         <Grid item lg={3} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="name"  variant="outlined" label={"Mois"} required={true} type="text" fullWidth sx={{color:"white"}}/>
+                            <TextFieldStyle name="name"  variant="outlined" label={"Mois"} required={true} type="text" fullWidth  sx={{color:"white"}}/>
                         </Grid>
                         <Grid item lg={3} xs={12} sm={6} md={6} sx={{display:"flex", flexDirection:"row"}}>
-                            <TextFieldStyle name="email"  variant="outlined" label={"Année"} type="text" required={true} fullWidth/>
+                            <TextFieldStyle name="email"  variant="outlined" label={"Année"} type="text" required={true} fullWidth />
                         </Grid>
                 </Grid>
             ) }
