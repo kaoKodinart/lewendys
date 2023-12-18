@@ -61,13 +61,13 @@ function CheckoutContent() {
         formData.append('detailsComment', commandeData?.detailsComment!);
         formData.append('emailClient', commandeData?.emailClient!);
         formData.append('heureRetrait', commandeData?.heureRetrait!);
-        formData.append('modePaiement', commandeData?.modePaiement!);
+        formData.append('modePaiement', payementType);
         formData.append('numTable', commandeData?.numTable!);
         formData.append('telephoneClient', commandeData?.telephoneClient!);
         formData.append('ville', commandeData?.ville!);
         
         if (formData) {
-            // sendCommandeData(formData, {'Content-Type': 'multipart/form-data',})
+            sendCommandeData(formData, {'Content-Type': 'multipart/form-data',})
          //    console.log(photo);      
             console.log(formData);
             // console.log(commandeData);
@@ -98,7 +98,7 @@ const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
     return (
         <CheckoutContentStyle>
             <div className="carouse"></div>
-            <TextFieldStyle defaultValue={""} name='typeDevis' select value={payementType} onChange={(e) => setpayementType(e.target.value)} label="Selectioner le mode de Payement" fullWidth>
+            <TextFieldStyle defaultValue={""} name='modePaiement' select value={payementType} onChange={(e) => setpayementType(e.target.value)} label="Selectioner le mode de Payement" fullWidth>
                 <MenuItem value={"Consommer Sur Place"}>Consommer Sur Place</MenuItem>
                 <MenuItem value={"A emporter"}>A emporter</MenuItem>
                 <MenuItem value={"Livraison a domicile"}>Livraison a domicile</MenuItem>
