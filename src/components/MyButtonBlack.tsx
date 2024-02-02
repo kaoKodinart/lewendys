@@ -1,5 +1,6 @@
 import { Button, SxProps, Typography, styled } from '@mui/material';
 import { PROJECT_COLORS } from '../common/ProjectConfig';
+import { Link } from 'react-router-dom';
 
 const MyButtonBlackStyle = styled(Button)(()=>({
     backgroundColor: PROJECT_COLORS.Or,
@@ -24,15 +25,18 @@ const MyButtonBlackText = styled(Typography)(()=>({
 interface Props {
     text: string,
     sx? : SxProps,
+    path? : string,
 }
 
-function MyButtonBlack({text, sx={}}: Props) {
+function MyButtonBlack({text, sx={}, path}: Props) {
     return (
-        <MyButtonBlackStyle sx={{...sx}}>
-            <MyButtonBlackText>
-            {text}
-            </MyButtonBlackText>
-        </MyButtonBlackStyle>
+        <Link to={path!}>
+            <MyButtonBlackStyle sx={{...sx}}>
+                <MyButtonBlackText>
+                {text}
+                </MyButtonBlackText>
+            </MyButtonBlackStyle>
+        </Link>
     );
 }
 

@@ -11,5 +11,7 @@ export const USER_PAGES = {
     reservation:"/reservation",
     panier:"/panier",
     checkout:"/checkout",
+    login:"/login",
+    register:"/register",
     // blogsDetail:"/blogsDetail/:id",
 };

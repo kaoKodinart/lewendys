@@ -10,6 +10,8 @@ import ContactPage from '../pages/ContactPage';
 import ReservationPage from '../pages/ReservationPage';
 import PanierPage from '../pages/PanierPage';
 import CheckOutPage from '../pages/CheckOutPage';
+import LoginPage from '../pages/LoginPage';
+import RegisterPage from '../pages/RegisterPage';
 
 
 
@@ -40,6 +42,8 @@ export default function Router() {
                 {path: USER_PAGES.reservation, element: <ReservationPage/>},
                 {path: USER_PAGES.panier, element: <PanierPage/>},
                 {path: USER_PAGES.checkout, element: <CheckOutPage/>},
+                {path: USER_PAGES.login, element: <LoginPage/>},
+                {path: USER_PAGES.register, element: <RegisterPage/>},
             ]
         },
 

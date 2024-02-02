@@ -40,7 +40,7 @@ const SocialMediaItemStyle = styled (IconButton)(()=>({
     },
 }))
 
-const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+const StyledBadge = styled(Badge)<BadgeProps>(() => ({
     '& .MuiBadge-badge': {
       right: -3,
       top: 8,
@@ -88,7 +88,7 @@ function Header() {
                         </Grid>
                         <Grid item lg={2} md={2} sm={11} xs={11} sx={{display:"flex", justifyContent: isMobile ? "flex-end" : "center", }}>
                             {/* <Link to={USER_PAGES.devis} > */}
-                                <MyButtonBlack text= {"Login"} sx={{    alignSelf:"center",}} />
+                                <MyButtonBlack path={USER_PAGES.login} text= {"Login"} sx={{    alignSelf:"center",}} />
                             {/* </Link> */}
                             {/* <Button>HELLO</Button> */}
                             {/* {isMobile && <MyDrawer opening={openDrawer} closing={handleOPenDrawer}/>} */}
