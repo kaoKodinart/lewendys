@@ -3,10 +3,10 @@ import MyButtonBlack from "./MyButtonBlack";
 import TextButton from "./TextButton";
 import { USER_PAGES } from "../routes/path";
 import { PROJECT_COLORS } from "../common/ProjectConfig";
-import React from "react";
+import React, { useEffect } from "react";
 import { UserModel } from "../models/UserModel";
-import { useAppDispatch } from "../redux/store";
-import { signInWithEmailAndPassword } from "../redux/slices/Auth";
+import { RootState, useAppDispatch, useAppSelector } from "../redux/store";
+import { getCurentUser, signInWithEmailAndPassword } from "../redux/slices/Auth";
 
 const LoginFormContainer = styled (Box)(({theme})=>({
     width:"60%",
@@ -80,6 +80,15 @@ const ButtonContainer = styled ("div")(()=>({
 }))
 function LoginForm() {
 
+    const user = useAppSelector((state:RootState) => state.auth.user);
+
+    useEffect (() => {
+        dispatch(getCurentUser()).then((res) => console.log(res)).catch(error => {
+          console.log(error);
+          
+        })
+       }, [])
+
     const [userData, setUserData] = React.useState<UserModel>();
     const dispatch = useAppDispatch();
 
@@ -90,7 +99,7 @@ function LoginForm() {
         console.log(userData);
         if (formData) {
             dispatch(signInWithEmailAndPassword({formdata: formData})).unwrap().then(()=> {
-                alert("connecté avec suucès")
+                alert(user?.email)
             })  
             console.log(formData);
      }        
