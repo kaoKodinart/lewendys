@@ -1,5 +1,5 @@
 import { AppBar, Badge, BadgeProps, Container, Grid, IconButton, styled } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import HeaderAnim from '../../animations/HeaderAnim';
 import useResponsive from '../../hooks/useResponsive';
 import Menu from './Menu';
@@ -14,6 +14,7 @@ import { HeaderConfig } from '../../common/HeaderConfig';
 import { Link } from 'react-router-dom';
 import { USER_PAGES } from '../../routes/path';
 import { RootState, useAppDispatch, useAppSelector } from '../../redux/store';
+import { getCurentUser } from '../../redux/slices/Auth';
 
 const MenuMobileBtn = styled(IconButton)(() => ({
     alignSelf:"center",
@@ -53,6 +54,13 @@ const StyledBadge = styled(Badge)<BadgeProps>(() => ({
 function Header() {
     const dispatch = useAppDispatch();
     const user = useAppSelector((state:RootState) => state.auth.user);
+
+    useEffect (() => {
+        dispatch(getCurentUser()).then((res) => console.log(res)).catch(error => {
+          console.log(error);
+          
+        })
+       }, [])
 
     const isMobile = useResponsive("down", "md");
     const isOffset = useOffSetTop(HeaderConfig.HEIGHT);
