@@ -13,7 +13,7 @@ import useOffSetTop from '../../hooks/useOffSetTop';
 import { HeaderConfig } from '../../common/HeaderConfig';
 import { Link } from 'react-router-dom';
 import { USER_PAGES } from '../../routes/path';
-import { RootState, useAppSelector } from '../../redux/store';
+import { RootState, useAppDispatch, useAppSelector } from '../../redux/store';
 
 const MenuMobileBtn = styled(IconButton)(() => ({
     alignSelf:"center",
@@ -51,6 +51,9 @@ const StyledBadge = styled(Badge)<BadgeProps>(() => ({
   }));
 
 function Header() {
+    const dispatch = useAppDispatch();
+    const user = useAppSelector((state:RootState) => state.auth.user);
+
     const isMobile = useResponsive("down", "md");
     const isOffset = useOffSetTop(HeaderConfig.HEIGHT);
 
@@ -88,7 +91,7 @@ function Header() {
                         </Grid>
                         <Grid item lg={2} md={2} sm={11} xs={11} sx={{display:"flex", justifyContent: isMobile ? "flex-end" : "center", }}>
                             {/* <Link to={USER_PAGES.devis} > */}
-                                <MyButtonBlack path={USER_PAGES.login} text= {"Login"} sx={{    alignSelf:"center",}} />
+                                <MyButtonBlack path={USER_PAGES.login} text= {user ? user!.email : "Login"} sx={{    alignSelf:"center",}} />
                             {/* </Link> */}
                             {/* <Button>HELLO</Button> */}
                             {/* {isMobile && <MyDrawer opening={openDrawer} closing={handleOPenDrawer}/>} */}

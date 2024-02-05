@@ -11,6 +11,13 @@ export const signInWithEmailAndPassword = createAsyncThunk(
     }
 );
 
+export const getCurentUser = createAsyncThunk (
+    "auth/getCurentUser", 
+    async () => {
+        return await auth.getCurrentUser();
+    }
+)
+
 interface AuthState {
     // userData: UserDataModel | null,
     user: UserModel | null,
@@ -29,6 +36,9 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(signInWithEmailAndPassword.fulfilled, (state, { payload }) => {
             state.user = payload!;
+        });
+        builder.addCase(getCurentUser.fulfilled, (state, { payload }) => {
+            state.user = payload;
         });
     }
 });
