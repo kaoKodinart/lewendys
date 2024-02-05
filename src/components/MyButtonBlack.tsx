@@ -26,12 +26,13 @@ interface Props {
     text: string,
     sx? : SxProps,
     path? : string,
+    // cliqFunc : Function
 }
 
 function MyButtonBlack({text, sx={}, path}: Props) {
     return (
         <Link to={path!}>
-            <MyButtonBlackStyle sx={{...sx}}>
+            <MyButtonBlackStyle sx={{...sx}} type="submit">
                 <MyButtonBlackText>
                 {text}
                 </MyButtonBlackText>
