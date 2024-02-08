@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import platReducer from "./slices/Plats";
 import menuReducer from "./slices/Menus";
 import authReducer from "./slices/Auth";
+import commandeReducer from "./slices/Commandes";
 
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
         plats: platReducer,
         menus: menuReducer,
         auth: authReducer,
+        userCommande: commandeReducer,
     },
 });
 

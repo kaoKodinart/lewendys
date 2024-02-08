@@ -5,10 +5,12 @@ import { UserModel } from "../../../models/UserModel";
 export const signIn = async (formData: FormData, headers: any) => {
     try {
         console.log(formData);
-        const res = await axios.post("http://localhost:8000/api/auth_login", formData, {headers}).then((response) => {
+        return await axios.post("http://localhost:8000/api/login", formData, {headers}).then((response) => {
             console.log("login succès");
-            console.log(response);
-            console.log(res);
+            // console.log(response.data.token);
+            console.log("http",response.data);
+            return response.data;
+            // console.log(res.data);
         });
     } catch (error) {
         console.error(error); 
@@ -18,12 +20,15 @@ export const signIn = async (formData: FormData, headers: any) => {
 
     export const getCurrentUser = async (): Promise<UserModel> => {
         try {
-          const response = await axios.get("http://localhost:8000/api/auth_login");
-          // VÃ©rifiez si la rÃ©ponse est correcte
-          if (response.data && response.data.data) {
-            return response.data.data;
+          const token = localStorage.getItem('token');
+          const response = await axios.get("http://localhost:8000/api/login", {
+            headers: {
+              'Authorization': `Bearer ${token}`
+          }
+          });
+          if (response.data) {
+            return response.data.user;   
           } else {
-            // GÃ©rez le cas oÃ¹ la rÃ©ponse n'est pas au format attendu
             throw new Error("RÃ©ponse inattendue du serveur");
           }
         } catch (error) {

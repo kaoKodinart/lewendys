@@ -1,11 +1,13 @@
-import { Box, Button, FormControlLabel, Grid, MenuItem, Radio, RadioGroup, TextField, Typography, styled } from "@mui/material";
+import { Box, Button, FormControlLabel, Grid, MenuItem, Radio, RadioGroup, Table, TableCell, TableRow, TextField, Typography, styled } from "@mui/material";
 import SectionStyle from "../../Styles/SectionStyle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MyButtonCoffe from "../../components/MyButtonCoffe";
-import { RootState, useAppSelector } from "../../redux/store";
+import { RootState, useAppDispatch, useAppSelector } from "../../redux/store";
 import React from "react";
 import { CommandeModel } from "../../models/CommandeModel";
 import { sendCommandeData } from "../../services/http/commandeHttp";
+import { useNavigate } from "react-router-dom";
+import { getUserCommandeData } from "../../redux/slices/Commandes";
 
 const CheckoutContentStyle = styled(SectionStyle)(({theme}) => ({
     
@@ -46,7 +48,21 @@ const TextFieldStyle=styled(TextField)(()=>({
 }));
 function CheckoutContent() {
     const [commandeData, setCommandeData] = React.useState<CommandeModel>();
+    const navigate = useNavigate();
+    const userDataString = localStorage.getItem("user");
+    const userData = JSON.parse(userDataString!);
+    const dispatch = useAppDispatch();
+    const commandes = useAppSelector((state:RootState) => state.userCommande.commandes);
+
+    useEffect (() => {
+        dispatch(getUserCommandeData(userData.id)).then((res) => console.log(res)).catch(error => {
+          console.log(error);
+          
+        })
+       }, [])
+
     const validate = () => {
+        // console.log(commandes);
         const prixPanier = panier.map((item) => item.prixFinal).reduce((previousValue, currentValue) => previousValue + currentValue, 0);
         console.log(prixPanier);
         const prixPanierString: string = prixPanier.toString();
@@ -65,9 +81,10 @@ function CheckoutContent() {
         formData.append('numTable', commandeData?.numTable!);
         formData.append('telephoneClient', commandeData?.telephoneClient!);
         formData.append('ville', commandeData?.ville!);
+        formData.append('user_id', userData.id);
         
         if (formData) {
-            sendCommandeData(formData, {'Content-Type': 'multipart/form-data',})
+            sendCommandeData(formData, {'Content-Type': 'multipart/form-data',}).then(()=>{})
          //    console.log(photo);      
             console.log(formData);
             // console.log(commandeData);
@@ -200,8 +217,19 @@ const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
             {/* <Button onClick={()=> console.log(panier)}> */}
                 test
             </Button>
-            <MyButtonCoffe text={"Valider"}/>
+            <MyButtonCoffe text={"Valider"} cliqFunc={()=>{}}/>
             </Box>
+            <Table>
+            {
+                commandes?.map((item, index) => 
+                <TableRow key={index}>
+                    <TableCell>{item.user_id}</TableCell>
+                    <TableCell>{item.nomClient}</TableCell>
+                    <TableCell>{item.modePaiement}</TableCell>
+                </TableRow>
+                )
+            }
+                </Table>
         </CheckoutContentStyle>
     );
 }

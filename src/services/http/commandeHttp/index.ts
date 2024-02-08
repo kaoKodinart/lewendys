@@ -1,4 +1,5 @@
 import axios from "axios";
+import { CommandeModel } from "../../../models/CommandeModel";
 
 
 export const sendCommandeData = async (formData: FormData, headers: any) => {
@@ -13,4 +14,9 @@ export const sendCommandeData = async (formData: FormData, headers: any) => {
         console.error(error); 
        
       }
+    }
+
+    export const getUserCommandeData = async (id: string): Promise<Array<CommandeModel>> => {
+        return  ((await axios.get(`http://localhost:8000/api/commandes/${id}`)).data.data
+        )
     }

@@ -1,4 +1,4 @@
-import { AppBar, Badge, BadgeProps, Container, Grid, IconButton, styled } from '@mui/material';
+import { AppBar, Badge, BadgeProps, Button, Container, Grid, IconButton, styled } from '@mui/material';
 import { useEffect, useState } from 'react';
 import HeaderAnim from '../../animations/HeaderAnim';
 import useResponsive from '../../hooks/useResponsive';
@@ -52,15 +52,23 @@ const StyledBadge = styled(Badge)<BadgeProps>(() => ({
   }));
 
 function Header() {
+    const userDataString = localStorage.getItem("user");
+    const userData = JSON.parse(userDataString!);
+
+    const logout = () => {
+        localStorage.removeItem("user");
+        // console.log("localStorage",localStorage.getItem("token"));
+    }
+
     const dispatch = useAppDispatch();
     const user = useAppSelector((state:RootState) => state.auth.user);
 
-    useEffect (() => {
-        dispatch(getCurentUser()).then((res) => console.log(res)).catch(error => {
-          console.log(error);
+    // useEffect (() => {
+    //     dispatch(getCurentUser()).then((res) => console.log("headerRes",res)).catch(error => {
+    //       console.log(error);
           
-        })
-       }, [])
+    //     })
+    //    }, [])
 
     const isMobile = useResponsive("down", "md");
     const isOffset = useOffSetTop(HeaderConfig.HEIGHT);
@@ -72,7 +80,6 @@ function Header() {
     }
 
     const panier = useAppSelector((state: RootState) => state.plats.plats);
-
 
     return (
         <AppBar>
@@ -99,7 +106,8 @@ function Header() {
                         </Grid>
                         <Grid item lg={2} md={2} sm={11} xs={11} sx={{display:"flex", justifyContent: isMobile ? "flex-end" : "center", }}>
                             {/* <Link to={USER_PAGES.devis} > */}
-                                <MyButtonBlack path={USER_PAGES.login} text= {user ? user!.email : "Login"} sx={{    alignSelf:"center",}} />
+                                <MyButtonBlack path={USER_PAGES.login} text= {userData ? userData.id : "Login"} sx={{    alignSelf:"center",}} />
+                                <Button variant='contained' onClick={()=> {logout()}}>Deconnect</Button>
                             {/* </Link> */}
                             {/* <Button>HELLO</Button> */}
                             {/* {isMobile && <MyDrawer opening={openDrawer} closing={handleOPenDrawer}/>} */}

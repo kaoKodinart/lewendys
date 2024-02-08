@@ -22,11 +22,12 @@ const MyButtonCoffeText = styled(Typography)(()=>({
 interface Props {
     text: string,
     sx? : SxProps,
+    cliqFunc: Function;
 }
 
-function MyButtonCoffe({text, sx={}}: Props) {
+function MyButtonCoffe({text, sx={}, cliqFunc}: Props) {
     return (
-        <MyButtonCoffeStyle sx={{...sx}}>
+        <MyButtonCoffeStyle sx={{...sx}} onClick={()=> cliqFunc()}>
             <MyButtonCoffeText>
             {text}
             </MyButtonCoffeText>

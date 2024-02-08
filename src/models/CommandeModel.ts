@@ -1,6 +1,7 @@
 import { PanierItemModel } from "./PanierItemModel";
 
 export interface CommandeModel {
+    user_id: string,
     panier: PanierItemModel[],
     panierPrice: number,
     modePaiement: string,

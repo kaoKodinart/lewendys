@@ -85,7 +85,6 @@ function LoginForm() {
     useEffect (() => {
         dispatch(getCurentUser()).then((res) => console.log(res)).catch(error => {
           console.log(error);
-          
         })
        }, [])
 
@@ -98,11 +97,23 @@ function LoginForm() {
         formData.append('password', userData!.password);
         console.log(userData);
         if (formData) {
-            dispatch(signInWithEmailAndPassword({formdata: formData})).unwrap().then(()=> {
-                alert(user?.email)
-            })  
+            dispatch(signInWithEmailAndPassword({formdata: formData})).unwrap().then((currentUser)=> {
+                console.log("localStorage",localStorage.getItem("token"));
+                // console.log("form", currentUser);
+                // alert(user?.email)
+                // alert(currentUser.email)
+            }).catch((error) => {
+                console.error("Erreur de connexion :", error);
+              });
             console.log(formData);
      }        
+    }
+    const locStore = () => {
+        console.log("localStorage",localStorage.getItem("token"));
+    }
+    const logout = () => {
+        localStorage.removeItem("token");
+        // console.log("localStorage",localStorage.getItem("token"));
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,6 +135,8 @@ function LoginForm() {
                 <ButtonContainer>
                     <MyButtonBlack  text='Valider' sx={{padding:"15px 40px", mt:3}} />
                     <Button onClick={()=> validate()} type="submit">Valider</Button>
+                    <Button onClick={()=> locStore()} type="submit">Test</Button>
+                    <Button onClick={()=> logout()} type="submit">deconnect</Button>
                 </ButtonContainer>
             {/* </Container> */}
             <LoginFoot>

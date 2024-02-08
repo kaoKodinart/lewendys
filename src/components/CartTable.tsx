@@ -3,7 +3,7 @@ import { RootState, useAppSelector } from '../redux/store';
 import CartItem from './CartItem';
 import { PanierItemModel } from '../models/PanierItemModel';
 import MyButtonCoffe from './MyButtonCoffe';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { USER_PAGES } from '../routes/path';
 
 const CartTableContent = styled(Box)(()=>({
@@ -46,6 +46,15 @@ const CartFoot = styled("div")(()=>({
 
 function CartTable() {
     const panier = useAppSelector((state: RootState) => state.plats.plats);
+    const navigate = useNavigate();
+
+    const userDataString = localStorage.getItem("user");
+    const userData = JSON.parse(userDataString!);
+
+    const validateCommand = ()=> {
+        // console.log(userData);
+        navigate(userData ? "/checkout" : "/login")
+    }
 
     function calculateTotalPrice(panier: PanierItemModel[]) {
         let totalPrice = 0;
@@ -84,9 +93,9 @@ function CartTable() {
                         }
                         </Grid>
                         <CartFoot>
-                            <Link to={USER_PAGES.checkout}>
-                                <MyButtonCoffe text='Commander' />
-                            </Link>
+                            {/* <Link to={USER_PAGES.checkout}> */}
+                                <MyButtonCoffe text='Commander' cliqFunc={validateCommand}/>
+                            {/* </Link> */}
                         </CartFoot>
                     </div>
                 )
