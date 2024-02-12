@@ -11,10 +11,11 @@ import MyButtonBlack from '../MyButtonBlack';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import useOffSetTop from '../../hooks/useOffSetTop';
 import { HeaderConfig } from '../../common/HeaderConfig';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { USER_PAGES } from '../../routes/path';
 import { RootState, useAppDispatch, useAppSelector } from '../../redux/store';
 import { getCurentUser } from '../../redux/slices/Auth';
+import ProfilComponent from '../ProfilComponent';
 
 const MenuMobileBtn = styled(IconButton)(() => ({
     alignSelf:"center",
@@ -54,6 +55,7 @@ const StyledBadge = styled(Badge)<BadgeProps>(() => ({
 function Header() {
     const userDataString = localStorage.getItem("user");
     const userData = JSON.parse(userDataString!);
+    const navigate = useNavigate();
 
     const logout = () => {
         localStorage.removeItem("user");
@@ -106,8 +108,14 @@ function Header() {
                         </Grid>
                         <Grid item lg={2} md={2} sm={11} xs={11} sx={{display:"flex", justifyContent: isMobile ? "flex-end" : "center", }}>
                             {/* <Link to={USER_PAGES.devis} > */}
-                                <MyButtonBlack path={USER_PAGES.login} text= {userData ? userData.id : "Login"} sx={{    alignSelf:"center",}} />
-                                <Button variant='contained' onClick={()=> {logout()}}>Deconnect</Button>
+                            {
+                                userData ? 
+                                // <MyButtonBlack cliqFunc={()=> navigate("/dashboard")} text= {"Dashboard"} sx={{    alignSelf:"center",}} />
+                                <ProfilComponent/>
+                                :
+                                <MyButtonBlack cliqFunc={()=> navigate("/login")} text= {"Login"} sx={{    alignSelf:"center",}} />
+                            }
+                                {/* <Button variant='contained' onClick={()=> {logout()}}>Deconnect</Button> */}
                             {/* </Link> */}
                             {/* <Button>HELLO</Button> */}
                             {/* {isMobile && <MyDrawer opening={openDrawer} closing={handleOPenDrawer}/>} */}

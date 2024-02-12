@@ -55,7 +55,7 @@ function CheckoutContent() {
     const commandes = useAppSelector((state:RootState) => state.userCommande.commandes);
 
     useEffect (() => {
-        dispatch(getUserCommandeData(userData.id)).then((res) => console.log(res)).catch(error => {
+        dispatch(getUserCommandeData(userData?.id)).then((res) => console.log(res)).catch(error => {
           console.log(error);
           
         })
@@ -213,23 +213,8 @@ const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
                         </Grid>
                 </Grid>
             ) }
-            <Button onClick={()=> validate()}>
-            {/* <Button onClick={()=> console.log(panier)}> */}
-                test
-            </Button>
-            <MyButtonCoffe text={"Valider"} cliqFunc={()=>{}}/>
+            <MyButtonCoffe text={"Valider"} cliqFunc={()=>{validate()}}/>
             </Box>
-            <Table>
-            {
-                commandes?.map((item, index) => 
-                <TableRow key={index}>
-                    <TableCell>{item.user_id}</TableCell>
-                    <TableCell>{item.nomClient}</TableCell>
-                    <TableCell>{item.modePaiement}</TableCell>
-                </TableRow>
-                )
-            }
-                </Table>
         </CheckoutContentStyle>
     );
 }

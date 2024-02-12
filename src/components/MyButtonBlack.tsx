@@ -26,18 +26,18 @@ interface Props {
     text: string,
     sx? : SxProps,
     path? : string,
-    // cliqFunc : Function
+    cliqFunc : Function
 }
 
-function MyButtonBlack({text, sx={}, path}: Props) {
+function MyButtonBlack({text, sx={}, path, cliqFunc}: Props) {
     return (
-        <Link to={path!}>
-            <MyButtonBlackStyle sx={{...sx}} type="submit">
+        // <Link to={path!}>
+            <MyButtonBlackStyle sx={{...sx}} type="submit" onClick={()=>cliqFunc()}>
                 <MyButtonBlackText>
                 {text}
                 </MyButtonBlackText>
             </MyButtonBlackStyle>
-        </Link>
+        // </Link>
     );
 }
 

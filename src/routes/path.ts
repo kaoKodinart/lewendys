@@ -13,5 +13,6 @@ export const USER_PAGES = {
     checkout:"/checkout",
     login:"/login",
     register:"/register",
+    dashboard:"/dashboard",
     // blogsDetail:"/blogsDetail/:id",
 };

@@ -12,6 +12,7 @@ import PanierPage from '../pages/PanierPage';
 import CheckOutPage from '../pages/CheckOutPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
+import UserDashboardPage from '../pages/UserDashboardPage';
 
 
 
@@ -44,6 +45,7 @@ export default function Router() {
                 {path: USER_PAGES.checkout, element: <CheckOutPage/>},
                 {path: USER_PAGES.login, element: <LoginPage/>},
                 {path: USER_PAGES.register, element: <RegisterPage/>},
+                {path: USER_PAGES.dashboard, element: <UserDashboardPage/>},
             ]
         },
 

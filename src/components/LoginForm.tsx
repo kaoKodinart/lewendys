@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import { UserModel } from "../models/UserModel";
 import { RootState, useAppDispatch, useAppSelector } from "../redux/store";
 import { getCurentUser, signInWithEmailAndPassword } from "../redux/slices/Auth";
+import { useNavigate } from "react-router-dom";
 
 const LoginFormContainer = styled (Box)(({theme})=>({
     width:"60%",
@@ -79,7 +80,8 @@ const ButtonContainer = styled ("div")(()=>({
     justifyContent:"center",
 }))
 function LoginForm() {
-
+    const panier = useAppSelector((state: RootState) => state.plats.plats);
+    const navigate = useNavigate();
     const user = useAppSelector((state:RootState) => state.auth.user);
 
     useEffect (() => {
@@ -99,6 +101,7 @@ function LoginForm() {
         if (formData) {
             dispatch(signInWithEmailAndPassword({formdata: formData})).unwrap().then((currentUser)=> {
                 console.log("localStorage",localStorage.getItem("token"));
+                navigate(panier.length ?  "/checkout" : "/dashboard")
                 // console.log("form", currentUser);
                 // alert(user?.email)
                 // alert(currentUser.email)
@@ -133,10 +136,10 @@ function LoginForm() {
                     </Grid>
                 </Grid>
                 <ButtonContainer>
-                    <MyButtonBlack  text='Valider' sx={{padding:"15px 40px", mt:3}} />
-                    <Button onClick={()=> validate()} type="submit">Valider</Button>
-                    <Button onClick={()=> locStore()} type="submit">Test</Button>
-                    <Button onClick={()=> logout()} type="submit">deconnect</Button>
+                    <MyButtonBlack cliqFunc={()=> validate()}  text='Valider' sx={{padding:"15px 40px", mt:3}} />
+                    {/* <Button onClick={()=> } type="submit">Valider</Button> */}
+                    {/* <Button onClick={()=> locStore()} type="submit">Test</Button> */}
+                    {/* <Button onClick={()=> logout()} type="submit">deconnect</Button> */}
                 </ButtonContainer>
             {/* </Container> */}
             <LoginFoot>
