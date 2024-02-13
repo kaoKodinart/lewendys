@@ -1,4 +1,4 @@
-import { Box, Button, FormControlLabel, Grid, MenuItem, Radio, RadioGroup, Table, TableCell, TableRow, TextField, Typography, styled } from "@mui/material";
+import { Box, Button, FormControlLabel, Grid, IconButton, MenuItem, Radio, RadioGroup, Snackbar, Table, TableCell, TableRow, TextField, Typography, styled } from "@mui/material";
 import SectionStyle from "../../Styles/SectionStyle";
 import { useEffect, useState } from "react";
 import MyButtonCoffe from "../../components/MyButtonCoffe";
@@ -8,6 +8,8 @@ import { CommandeModel } from "../../models/CommandeModel";
 import { sendCommandeData } from "../../services/http/commandeHttp";
 import { useNavigate } from "react-router-dom";
 import { getUserCommandeData } from "../../redux/slices/Commandes";
+import { clearPanier } from "../../redux/slices/Plats";
+import { CloseOutlined } from "@mui/icons-material";
 
 const CheckoutContentStyle = styled(SectionStyle)(({theme}) => ({
     
@@ -49,9 +51,9 @@ const TextFieldStyle=styled(TextField)(()=>({
 function CheckoutContent() {
     const [commandeData, setCommandeData] = React.useState<CommandeModel>();
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const userDataString = localStorage.getItem("user");
     const userData = JSON.parse(userDataString!);
-    const dispatch = useAppDispatch();
     const commandes = useAppSelector((state:RootState) => state.userCommande.commandes);
 
     useEffect (() => {
@@ -84,7 +86,11 @@ function CheckoutContent() {
         formData.append('user_id', userData.id);
         
         if (formData) {
-            sendCommandeData(formData, {'Content-Type': 'multipart/form-data',}).then(()=>{})
+            sendCommandeData(formData, {'Content-Type': 'multipart/form-data',}).then((res)=>{
+                handleOpenBar();
+                dispatch(clearPanier());
+                navigate("/")
+            })
          //    console.log(photo);      
             console.log(formData);
             // console.log(commandeData);
@@ -111,6 +117,36 @@ const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCommandeData((prev) => ({...prev, [e.target.name]: e.target.value} as CommandeModel));
         console.log(commandeData);
       };
+
+      const [openBar, setOpenBar] = useState(false);
+
+      const handleOpenBar = () => {
+          setOpenBar(true);
+        };
+  
+        const handleCloseBar = (event: React.SyntheticEvent | Event, reason?: string) => {
+          if (reason === 'clickaway') {
+            return;
+          }
+      
+          setOpenBar(false);
+        };
+
+      const action = (
+        <React.Fragment>
+          <Button color="secondary" size="small" onClick={handleCloseBar}>
+            OK
+          </Button>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleCloseBar}
+          >
+            <CloseOutlined fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      );
 
     return (
         <CheckoutContentStyle>
@@ -215,6 +251,9 @@ const handleChangeCommandeData = (e: React.ChangeEvent<HTMLInputElement>) => {
             ) }
             <MyButtonCoffe text={"Valider"} cliqFunc={()=>{validate()}}/>
             </Box>
+
+            <Snackbar open={openBar} autoHideDuration={5000} onClose={handleCloseBar} message="Votre Message a été envoyé avec succès." action={action} />     
+
         </CheckoutContentStyle>
     );
 }
